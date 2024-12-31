@@ -1,5 +1,7 @@
 import React from "react";
 import { Scroll } from "@react-three/drei";
+import box1iconimage from "../assets/box1iconimage.png";
+import box2iconimage from "../assets/box1iconimage2.png";
 
 const HerosectionFirst = () => {
   return (
@@ -7,7 +9,7 @@ const HerosectionFirst = () => {
       style={{
         width: "100%",
         minHeight: "100vh",
-        background:"transparent",
+        background: "transparent",
         position: "relative",
         display: "flex",
         justifyContent: "flex-start",
@@ -124,7 +126,7 @@ const HerosectionSecond = () => {
       style={{
         width: "100%",
         padding: "80px",
-        background: "transparent"
+        background: "transparent",
       }}
     >
       <div
@@ -194,11 +196,95 @@ const HerosectionSecond = () => {
   );
 };
 
+const HerosectionThird = () => {
+  return (
+    <div
+      style={{
+        width: "100%",
+        background: "transparent",
+        padding: "80px",
+        height:"100vh",
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        alignItems: "flex-start",
+      }}
+    >
+      <div
+        style={{
+          fontSize: "30px",
+          fontWeight: 300,
+          lineHeight: "35px",
+          textTransform: "uppercase",
+          WebkitTextStroke: "0.3px white",
+          WebkitTextFillColor: "transparent",
+          opacity: 0.6,
+          margin: "50px 0px",
+        }}
+      >
+        in less than half the time against competitors
+      </div>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "flex-start",
+          alignItems: "stretch",
+          width: "55%",
+        }}
+      >
+        {[box1iconimage, box2iconimage].map((src, index) => (
+          <div
+            key={index}
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "space-evenly",
+              alignItems: "center",
+              flex: 1,
+              border: "1px solid #dc5f00",
+              background: "#262626",
+              borderRadius: "10px",
+              margin: "0px 10px",
+            }}
+          >
+            <div style={{ height: "25%" }}>
+              <img
+                src={src}
+                alt={`box${index + 1}iconimage`}
+                style={{
+                  width: "100%",
+                  height: "100%",
+                  objectFit: "contain",
+                }}
+              />
+            </div>
+            <p
+              style={{
+                fontSize: "18px",
+                fontWeight: 700,
+                lineHeight: "21px",
+                textAlign: "center",
+                color: "#ffffff",
+                width: "70%",
+                textTransform: "uppercase",
+                marginTop: "20px",
+              }}
+            >
+              Greater improvements in productivity
+            </p>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+};
+
 const HeroSection = () => {
   return (
     <Scroll html>
       <HerosectionFirst />
       <HerosectionSecond />
+      <HerosectionThird />
     </Scroll>
   );
 };

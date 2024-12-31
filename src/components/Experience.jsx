@@ -4,7 +4,7 @@ import Infinitydouter from "../Infinitydouter";
 import HeroSection from "./HeroSection";
 
 const Experience = () => {
-  const totalPages = 2; // Define the total number of scroll pages
+  const totalPages = 3; // Define the total number of scroll pages
 
   return (
     <>

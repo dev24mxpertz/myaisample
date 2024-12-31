@@ -4,8 +4,9 @@ import { TextureLoader } from "three";
 import { useFrame, useLoader } from "@react-three/fiber";
 import gsap from "gsap";
 
-import orangeTexturePath from "./assets/photo-1530982011887-3cc11cc85693.jpg";
+import orangeTexturePath from "./assets/darkshadybg.jpg";
 import blueTexturePath from "./assets/startexture.jpg";
+import pinkTexturePath from "./assets/pinkshadetexture.jpg";
 
 const Floor_Height = 2.3;
 
@@ -15,6 +16,7 @@ export default function Infinitydouter({ position, totalPages, ...props }) {
   // Load multiple textures
   const orangeTexture = useLoader(TextureLoader, orangeTexturePath);
   const blueTexture = useLoader(TextureLoader, blueTexturePath);
+  const pinkTexture = useLoader(TextureLoader, pinkTexturePath);
 
   const ref = useRef();
   const rotationTimeline = useRef();
@@ -34,6 +36,7 @@ export default function Infinitydouter({ position, totalPages, ...props }) {
         {
           duration: sectionDuration * 2,
           y: rotationAngle,
+          x:Math.PI,
           ease: "power1.out",
         },
         (i - 1) * sectionDuration
@@ -50,7 +53,10 @@ export default function Infinitydouter({ position, totalPages, ...props }) {
       setCurrentTexture(orangeTexture);
     } else if (sectionIndex === 1 && currentTexture !== blueTexture) {
       setCurrentTexture(blueTexture);
+    } else if (sectionIndex === 2 && currentTexture !== pinkTexture) {
+      setCurrentTexture(pinkTexture);
     }
+    // pinkTexture;
 
     // Ensure material updates
     if (ref.current) {

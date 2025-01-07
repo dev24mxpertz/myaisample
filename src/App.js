@@ -1,16 +1,14 @@
 import React from "react";
-import { Canvas } from "@react-three/fiber";
-import Experience from "./components/Experience";
+
+import { Route, Routes } from "react-router-dom";
+import Indexpage from "./components/Indexpage";
 
 
 const App = () => {
   return (
-    <Canvas camera={{
-      fov:64,
-      position:[2.3,1.5,2.3]
-    }}>
-      <Experience/>
-    </Canvas>
+    <Routes>
+      <Route path="/" element={<Indexpage/>} />
+    </Routes>
   );
 };
 

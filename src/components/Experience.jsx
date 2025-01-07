@@ -2,9 +2,10 @@ import React from "react";
 import { OrbitControls, Scroll, ScrollControls } from "@react-three/drei";
 import Infinitydouter from "../Infinitydouter";
 import HeroSection from "./HeroSection";
+import { CombinedMeshes } from "./CombinedMeshes";
 
 const Experience = () => {
-  const totalPages = 3; // Define the total number of scroll pages
+  const totalPages = 9.2; // Define the total number of scroll pages
 
   return (
     <>
@@ -13,8 +14,8 @@ const Experience = () => {
       <OrbitControls enableZoom={false} />
       <ScrollControls damping={1.25} pages={totalPages}>
         <Scroll>
-          <HeroSection/>
-          <Infinitydouter position={[5, 0, -10]} totalPages={totalPages} />
+          <HeroSection />
+          <CombinedMeshes position={[0, 0, -3]} totalPages={totalPages} />
         </Scroll>
       </ScrollControls>
     </>

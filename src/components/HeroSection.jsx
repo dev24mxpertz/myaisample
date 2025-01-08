@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useRef } from "react";
 import { Scroll } from "@react-three/drei";
 import box1iconimage from "../assets/box1iconimage.png";
 import box2iconimage from "../assets/box1iconimage2.png";
@@ -6,7 +6,8 @@ import box1iconimage3 from "../assets/box1iconimage3.png";
 import box1iconimage4 from "../assets/box1iconimage4.png";
 import box1iconimage5 from "../assets/box1iconimage5.png";
 import box1iconimage6 from "../assets/box1iconimage6.png";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import gsap from "gsap";
 
 const HerosectionFirst = () => {
   return (
@@ -386,17 +387,190 @@ const AIFooter = () => (
   </div>
 );
 
+const LayoutOverlay = ({
+  isVisible,
+  toggleOverlay,
+  handleaboutnavigate,
+  handlehomenavigate,
+  handleFrontendpagenavigate,
+  handleBackendpagenavigate,
+  handleContactusnavigate,
+}) => {
+  const overlayRef = useRef();
+
+  React.useEffect(() => {
+    if (isVisible) {
+      gsap.to(overlayRef.current, {
+        duration: 0.5,
+        opacity: 1,
+        x: 0,
+        ease: "power2.out",
+      });
+    } else {
+      gsap.to(overlayRef.current, {
+        duration: 0.5,
+        opacity: 0,
+        x: "-100%",
+        ease: "power2.in",
+      });
+    }
+  }, [isVisible]);
+
+  return (
+    <div
+      ref={overlayRef}
+      className="layout-overlay"
+      style={{
+        position: "fixed",
+        top: 0,
+        left: 0,
+        width: "100%",
+        height: "100%",
+        backgroundColor: "black",
+        transform: "translateX(-100%)",
+        opacity: 0,
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "flex-start",
+        alignItems: "center",
+        padding: "300px 50px",
+        zIndex: 1000,
+      }}
+    >
+      <button
+        style={{
+          position: "absolute",
+          top: "20px",
+          right: "20px",
+          background: "none",
+          color: "white",
+          border: "none",
+          fontSize: "24px",
+          cursor: "pointer",
+        }}
+        onClick={toggleOverlay}
+      >
+        ✖
+      </button>
+      <div className="Menu_container_contentbox">
+        <div className="Menu_container_contentbox_left">
+          <button
+            onClick={handlehomenavigate}
+            className="Menu_container_contentbox_left_link"
+          >
+            Home
+          </button>
+          <button
+            onClick={handleaboutnavigate}
+            className="Menu_container_contentbox_left_link"
+          >
+            About Us
+          </button>
+          <button
+            onClick={handleContactusnavigate}
+            className="Menu_container_contentbox_left_link"
+          >
+            Contact Us
+          </button>
+        </div>
+        <div className="Menu_container_contentbox_right">
+          <button
+            onClick={handleFrontendpagenavigate}
+            className="Menu_container_contentbox_right_link"
+          >
+            AI ASSISTANT FOR CUSTOMER SUPPORT
+          </button>
+          <button
+            onClick={handleBackendpagenavigate}
+            className="Menu_container_contentbox_right_link"
+          >
+            AI WORKFORCE FOR BACKEND OPERATIONS
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+};
+
 const HeroSection = () => {
+  const [isOverlayVisible, setOverlayVisible] = useState(false);
+  const navigate = useNavigate();
+  const handlehomenavigate = () => {
+    navigate("/");
+  };
+
+  const handleaboutnavigate = () => {
+    navigate("/Aboutus");
+  };
+
+  const handleFrontendpagenavigate = () => {
+    navigate("/Frontend_AI");
+  };
+
+  const handleBackendpagenavigate = () => {
+    navigate("/Frontend_AI");
+  };
+
+  const handleContactusnavigate = () => {
+    navigate("/ContactUs");
+  };
+
+  const toggleOverlay = () => {
+    setOverlayVisible(!isOverlayVisible);
+  };
+
   return (
     <Scroll html>
-      <HerosectionFirst />
-      <HerosectionSecond />
-      <HerosectionThird />
-      <HerosectionFourth />
-      <HerosectionFifth />
-      <Herosectionsixth />
-      <Herosectionseventh />
-      {/* <AIFooter /> */}
+      <div className="Main_Layout_Container">
+        <div className="Layout_section">
+          <HerosectionFirst />
+        </div>
+        <div className="Layout_section">
+          <HerosectionSecond />
+        </div>
+        <div className="Layout_section">
+          <HerosectionThird />
+        </div>
+        <div className="Layout_section">
+          <HerosectionFourth />
+        </div>
+        <div className="Layout_section">
+          <HerosectionFifth />
+        </div>
+        <div className="Layout_section">
+          <Herosectionsixth />
+        </div>
+        <div className="Layout_section">
+          <Herosectionseventh />
+        </div>
+        {/* <AIFooter /> */}
+        <LayoutOverlay
+          isVisible={isOverlayVisible}
+          toggleOverlay={toggleOverlay}
+          handlehomenavigate={handlehomenavigate}
+          handleaboutnavigate={handleaboutnavigate}
+          handleFrontendpagenavigate={handleFrontendpagenavigate}
+          handleBackendpagenavigate={handleBackendpagenavigate}
+          handleContactusnavigate={handleContactusnavigate}
+        />
+        <button
+          onClick={toggleOverlay}
+          style={{
+            position: "absolute",
+            top: "20px",
+            right: "20px",
+            zIndex: 900,
+            background:
+              "linear-gradient(131.19deg, #1c1c1c 1.42%, #292929 100.93%)",
+            color: "white",
+            border: "none",
+            padding: "10px 20px",
+            cursor: "pointer",
+          }}
+        >
+          <i class="bi bi-menu-button-fill"></i>
+        </button>
+      </div>
     </Scroll>
   );
 };

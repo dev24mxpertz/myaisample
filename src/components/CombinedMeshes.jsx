@@ -13,7 +13,7 @@ import { Mountd } from "./Mountd";
 const Floor_Height = 10; // Height adjustment for the floor
 const radius = 3; // Distance from the center of the model to the camera
 
-export const CombinedMeshes = ({ position, totalPages, ...props }) => {
+export const CombinedMeshes = ({ position, ...props }) => {
   const ref = useRef();
   const scroll = useScroll();
 

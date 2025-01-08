@@ -1,12 +1,11 @@
-import React from "react";
+import React from 'react'
 import { OrbitControls, Scroll, ScrollControls } from "@react-three/drei";
-import Infinitydouter from "../Infinitydouter";
-import HeroSection from "./HeroSection";
-import { CombinedMeshes } from "./CombinedMeshes";
+import { CombinedMeshes } from "../CombinedMeshes";
+import AboutSection from './AboutSection';
+import "./About.css"
 
-const Experience = () => {
-  const totalPages = 7; // Define the total number of scroll pages
-
+const AboutCanva = () => {
+    const totalPages = 5; 
   return (
     <>
       <ambientLight intensity={1} />
@@ -14,12 +13,12 @@ const Experience = () => {
       <OrbitControls enableZoom={false} />
       <ScrollControls damping={1.25} pages={totalPages}>
         <Scroll>
-          <HeroSection />
+          <AboutSection />
           <CombinedMeshes position={[0, 0, -3]} totalPages={totalPages} />
         </Scroll>
       </ScrollControls>
     </>
   );
-};
+}
 
-export default Experience;
+export default AboutCanva

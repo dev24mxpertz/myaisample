@@ -1,8 +1,9 @@
-import React from "react";
-import { Canvas } from "@react-three/fiber";
-import Experience from "./Experience";
 
-const Indexpage = () => {
+import { Canvas } from "@react-three/fiber";
+import React from "react";
+import FrontEndCanva from "./FrontEndCanva";
+
+const FrontEndLayout = () => {
   return (
     <Canvas
       camera={{
@@ -11,9 +12,10 @@ const Indexpage = () => {
       }}
       style={{ zIndex: 2 }}
     >
-      <Experience />
+      <FrontEndCanva />
     </Canvas>
-  );
-};
 
-export default Indexpage;
+  );
+}
+
+export default FrontEndLayout

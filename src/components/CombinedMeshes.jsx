@@ -1,6 +1,6 @@
 import React, { useRef } from "react";
 import { useFrame } from "@react-three/fiber";
-import { useScroll } from "@react-three/drei";
+import { useScroll, useTexture } from "@react-three/drei";
 import { Mesha } from "./Mesha";
 import { Meshb } from "./Meshb";
 import { Meshc } from "./Meshc";
@@ -9,6 +9,10 @@ import { Mounta } from "./Mounta";
 import { Mountb } from "./Mountb";
 import { Mountc } from "./Mountc";
 import { Mountd } from "./Mountd";
+import firsttexture from "../assets/darkshadybg.jpg"
+import secondtexture  from "../assets/pinkshadetexture.jpg"
+import thirdtexture from "../assets/startexture.jpg"
+import fourthtexture from "../assets/photo-1530982011887-3cc11cc85693.jpg"
 
 const Floor_Height = 10; // Height adjustment for the floor
 const radius = 3; // Distance from the center of the model to the camera
@@ -17,8 +21,16 @@ export const CombinedMeshes = ({ position, ...props }) => {
   const ref = useRef();
   const scroll = useScroll();
 
+  const textures = [
+    useTexture(firsttexture),
+    useTexture(secondtexture),
+    useTexture(thirdtexture),
+    useTexture(fourthtexture),
+  ];
+
   useFrame(({ camera }) => {
     const progress = scroll.offset; // Scroll progress (0 to 1)
+    let activeTexture = null;
 
     // Define breakpoints
     const quarterProgress = 0.25;
@@ -33,6 +45,7 @@ export const CombinedMeshes = ({ position, ...props }) => {
       camera.position.x =  0.19;
       camera.position.y = 1.5;
       camera.position.z = -0.19;
+      activeTexture = textures[0];
 
       if (ref.current) {
         ref.current.position.x = localProgress ;
@@ -44,6 +57,7 @@ export const CombinedMeshes = ({ position, ...props }) => {
       const localProgress = (progress - quarterProgress) / halfProgress; // Normalize
 
       camera.position.z = localProgress -0.2 
+      activeTexture = textures[1];
       
       if (ref.current) {
         // ref.current.position.x += localProgress;
@@ -51,12 +65,13 @@ export const CombinedMeshes = ({ position, ...props }) => {
         // ref.current.position.z -=  localProgress;
       }
     } else if (progress > halfProgress && progress <= threeQuarterProgress) {
-      // Third quarter
+      // Third quarter  
       const localProgress = (progress - halfProgress) / quarterProgress; // Normalize
       
       // camera.position.x = Math.sin(angle) * radius;
       camera.position.y = localProgress + 6 ;
       camera.position.z = localProgress + 0.29;
+      activeTexture = textures[2];
 
       if (ref.current) {
         // ref.current.position.x = 40 + localProgress * 20;
@@ -66,6 +81,7 @@ export const CombinedMeshes = ({ position, ...props }) => {
     } else if (progress > threeQuarterProgress && progress <= fullProgress) {
       // Final quarter
       const localProgress = (progress - threeQuarterProgress) / quarterProgress; // Normalize
+      activeTexture = textures[3];
 
       // camera.position.y = localProgress;
       // // camera.position.y = 0;
@@ -78,6 +94,20 @@ export const CombinedMeshes = ({ position, ...props }) => {
       }
     }
 
+    if (ref.current) {
+      console.log(ref.current  , "-----ref.current--")
+      ref.current.children.forEach((group) => {
+        group.children.forEach((subgrp) => {
+          subgrp.children.forEach((mesh) => {
+            if (mesh.material) {
+              mesh.material.map = activeTexture;
+              mesh.material.needsUpdate = true;
+            }
+          })
+        
+        });
+      });
+    }
     // Ensure the camera looks at the center of the model
     camera.lookAt(0, 0, 0);
 

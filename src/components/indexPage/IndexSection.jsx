@@ -13,7 +13,7 @@ import goalicon1 from "../../assets/Growth.png";
 
 const Section = (props) => {
   return (
-    <section className="w-full h-screen px-16 flex flex-col justify-start items-start">
+    <section className="w-full h-screen px-16 flex flex-col justify-start items-center">
       <div className="w-full h-full max-w-[1300px]">{props.children}</div>
     </section>
   );

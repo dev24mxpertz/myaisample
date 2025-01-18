@@ -21,7 +21,7 @@ const Section = (props) => {
 
 const BlackSection = (props) => {
   return (
-    <section className="w-full h-screen px-16 flex bg-black flex-col justify-start items-start">
+    <section className="w-full h-screen px-16 flex bg-black flex-col justify-start items-center">
       <div className="w-full h-full max-w-[1300px]">{props.children}</div>
     </section>
   );

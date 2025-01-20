@@ -28,7 +28,9 @@ const Section = (props) => {
 const BlackSection = (props) => {
   return (
     <section className="w-full h-screen px-16 flex bg-black flex-col justify-start items-center">
-      <div className="w-full h-full flex justify-end items-center   max-w-[1300px]">{props.children}</div>
+      <div className="w-full h-full flex justify-end items-center   max-w-[1300px]">
+        {props.children}
+      </div>
     </section>
   );
 };
@@ -350,11 +352,11 @@ const IndexSection = () => {
               />
               <p className="my-16">
                 3517 W. Gray St. Utica, Pennsylvania 57867
-                <br />{" "}
-                <span>
-                  <i class="bi bi-c-circle"></i> 2025 Altus
-                </span>
+                <br />
               </p>
+              <span className="text-2xl font-poppins font-bold firstfooterspan">
+                <i class="bi bi-c-circle"></i> 2025 Altus
+              </span>
             </div>
             <div className="flex flex-col w-[25%] max-h-max footersection">
               <p>Twitter/X</p>

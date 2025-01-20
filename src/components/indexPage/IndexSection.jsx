@@ -28,7 +28,7 @@ const Section = (props) => {
 const BlackSection = (props) => {
   return (
     <section className="w-full h-screen px-16 flex bg-black flex-col justify-start items-center">
-      <div className="w-full h-full max-w-[1300px]">{props.children}</div>
+      <div className="w-full h-full flex justify-end items-center   max-w-[1300px]">{props.children}</div>
     </section>
   );
 };
@@ -42,20 +42,20 @@ const PartnerSection = ({ number, heading, content }) => {
 
   return (
     <div
-      className="partner_section relative"
+      className="partner_section"
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
-      <h3>
-        {isHovered
-          ? "Your success is our priority, now and in the future."
-          : heading}
-      </h3>
-      <span style={{ opacity: isHovered ? 0 : 1 }}>{number}.</span>
-      <p>{isHovered ? content : heading}</p>
       <span className="partner_arrow">
         <i className={`bi bi-arrow-up ${isHovered ? "rotated" : ""}`}></i>
       </span>
+      <h3>
+        {isHovered
+          ? "Your success is our priority, now and in the future."
+          : "Why Choose Us"}
+      </h3>
+      <span style={{ opacity: isHovered ? 0 : 1 }}>{number}.</span>
+      <p>{isHovered ? content : heading}</p>
     </div>
   );
 };
@@ -310,33 +310,33 @@ const IndexSection = () => {
             <div className="w-full p-2 flex gap-2 justify-between items-stretch">
               <PartnerSection
                 number={1}
-                heading="Why choose Us?"
+                heading="Expertise"
                 content="We provide regular updates, ongoing support, and continuous optimisation to ensure your unique challenges are always addressed, and our AI solutions continue delivering value as your business grows."
               />
               <PartnerSection
                 number={2}
-                heading="Why choose Us?"
+                heading="Seamless Integration"
                 content="We provide regular updates, ongoing support, and continuous optimisation to ensure your unique challenges are always addressed, and our AI solutions continue delivering value as your business grows."
               />
               <PartnerSection
                 number={3}
-                heading="Why choose Us?"
+                heading="PARTNERSHIP FOR LASTING IMPACT"
                 content="We provide regular updates, ongoing support, and continuous optimisation to ensure your unique challenges are always addressed, and our AI solutions continue delivering value as your business grows."
               />
               <PartnerSection
                 number={4}
-                heading="Why choose Us?"
+                heading="Bespoke Solutions"
                 content="We provide regular updates, ongoing support, and continuous optimisation to ensure your unique challenges are always addressed, and our AI solutions continue delivering value as your business grows."
               />
             </div>
           </div>
         </Section>
         <BlackSection>
-          <div className="w-full h-full flex flex-col items-center justify-evenly  ">
+          <div className="w-[65%] h-full flex flex-col items-start justify-evenly  ">
             <h3 className="logo_subheading">
               Your bold idea, our smart solutions
             </h3>
-            <h1 className="logo_heading">Lets Work Together!</h1>
+            <h1 className="logo_heading">Reinvent Your business</h1>
             <button className="logo_button">continue TO scroll</button>
           </div>
         </BlackSection>

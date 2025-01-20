@@ -602,7 +602,7 @@
 }
 
 .goalwrapper:hover .goalinner_circle > img {
-  width: 70px; /* Image expands on hover */
+  width: 40px; /* Image expands on hover */
 }
 
 .partner_heading {

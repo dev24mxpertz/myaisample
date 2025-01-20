@@ -9,19 +9,25 @@ import fourthIcon2 from "../../assets/fourthIcon2.png";
 import fourthIcon3 from "../../assets/fourthIcon3.png";
 import AI_image from "../../assets/AI_image.png";
 import { Link } from "react-router-dom";
-import goalicon1 from "../../assets/Growth.png";
+import goalicon1 from "../../assets/goalicon1.png";
+import goalicon2 from "../../assets/goalicon2.png";
+import goalicon3 from "../../assets/goalicon3.png";
+import goalicon4 from "../../assets/goalicon4.png";
+import goalicon5 from "../../assets/goalicon5.png";
 
 const Section = (props) => {
   return (
-    <section className="w-full h-screen px-16 flex flex-col justify-start items-center">
-      <div className="w-full h-full flex flex-col justify-evenly  max-w-[1300px]">{props.children}</div>
+    <section className="w-full h-screen px-16 flex flex-col justify-start items-start">
+      <div className="w-full h-full flex flex-col justify-evenly max-w-[1300px]">
+        {props.children}
+      </div>
     </section>
   );
 };
 
 const BlackSection = (props) => {
   return (
-    <section className="w-full h-screen px-16 flex bg-black flex-col justify-start items-center">
+    <section className="w-full h-screen px-16 flex bg-black flex-col justify-start items-start">
       <div className="w-full h-full max-w-[1300px]">{props.children}</div>
     </section>
   );
@@ -238,7 +244,7 @@ const IndexSection = () => {
                   <p>AI Tools that grow with you.</p>
                   <div className="goalouter_circle">
                     <div className="goalinner_circle">
-                      <img src={goalicon1} alt="goalicon1" />
+                      <img src={goalicon2} alt="goalicon2" />
                       <span>An agency saved 3 million</span>
                       <p>
                         Our intelligent solutions target unique challenges,
@@ -258,7 +264,7 @@ const IndexSection = () => {
                 <p>An agency saved 3 million operational hours using GenAI. </p>
                 <div className="goalouter_circle">
                   <div className="goalinner_circle">
-                    <img src={goalicon1} alt="goalicon1" />
+                    <img src={goalicon3} alt="goalicon3" />
                     <span>An agency saved 3 million</span>
                     <p>
                       Our intelligent solutions target unique challenges,
@@ -276,7 +282,7 @@ const IndexSection = () => {
                 <p>Achieve more without heavy costs</p>
                 <div className="goalouter_circle">
                   <div className="goalinner_circle">
-                    <img src={goalicon1} alt="goalicon1" />
+                    <img src={goalicon4} alt="goalicon4" />
                     <span>An agency saved 3 million</span>
                     <p>
                       Our intelligent solutions target unique challenges,
@@ -290,7 +296,7 @@ const IndexSection = () => {
                 <p>Stand out from the crowd.</p>
                 <div className="goalouter_circle">
                   <div className="goalinner_circle">
-                    <img src={goalicon1} alt="goalicon1" />
+                    <img src={goalicon5} alt="goalicon5" />
                     <span>An agency saved 3 million</span>
                     <p>
                       Our intelligent solutions target unique challenges,
@@ -342,22 +348,25 @@ const IndexSection = () => {
         </BlackSection>
         <Section>
           <div className="w-full flex px-2 h-full justify-between items-center">
-            <div className="flex flex-col w-[25%] max-h-max footersection">
+            <div className="flex flex-col justify-start w-[25%] max-h-max footersection">
               <img
                 src={logoimage}
                 alt="logo_image"
-                className="footer_logo_image"
+                className="footer_logo_image "
               />
-              <p>3517 W. Gray St. Utica, Pennsylvania 57867</p>
-              <p>
-                <i class="bi bi-c-circle"></i> 2025 Altus
+              <p className="my-16">
+                3517 W. Gray St. Utica, Pennsylvania 57867
+                <br />{" "}
+                <span>
+                  <i class="bi bi-c-circle"></i> 2025 Altus
+                </span>
               </p>
             </div>
             <div className="flex flex-col w-[25%] max-h-max footersection">
               <p>Twitter/X</p>
               <p>Instagram</p>
               <p>Linkedin</p>
-              <span>Reinvent your business </span>
+              <span className="my-6">Reinvent your business </span>
               <p>support@example.com</p>
             </div>
             <div className="flex flex-col w-[35%] max-h-max  footersection">

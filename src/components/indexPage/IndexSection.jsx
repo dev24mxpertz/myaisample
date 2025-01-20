@@ -17,7 +17,7 @@ import goalicon5 from "../../assets/goalicon5.png";
 
 const Section = (props) => {
   return (
-    <section className="w-full h-screen px-16 flex flex-col justify-start items-center">
+    <section className="w-full h-screen px-16 flex flex-col justify-start items-start">
       <div className="w-full h-full flex flex-col justify-evenly max-w-[1300px]">
         {props.children}
       </div>
@@ -27,7 +27,7 @@ const Section = (props) => {
 
 const BlackSection = (props) => {
   return (
-    <section className="w-full h-screen px-16 flex bg-black flex-col justify-start items-center">
+    <section className="w-full h-screen px-16 flex bg-black flex-col justify-start items-start">
       <div className="w-full h-full max-w-[1300px]">{props.children}</div>
     </section>
   );
@@ -131,7 +131,7 @@ const IndexSection = () => {
           </div>
         </Section>
         <Section>
-          <div className="w-full h-full py-16">
+          <div className="w-full py-16">
             <h1 className="thirdSectionheading">GEN AI IN ACTION</h1>
             <div className="w-full  p-2 flex items-center gap-x-1.5 justify-between">
               <div className="w-1/3 px-4 py-4 bg-orange-700 fourthbox relative">
@@ -179,10 +179,7 @@ const IndexSection = () => {
           <div className="w-full py-8 ">
             <h1 className="fouthSectionheading">Our suite of Solutions</h1>
             <div className="w-full p-2 flex justify-between gap-3 items-stretch">
-              <div className="w-[48%] p-3 oursite_box flex flex-col">
-                <div className="image_wrapper">
-                  <img src={AI_image} alt="Icon" className="hover_image" />
-                </div>
+              <div className="w-[48%] oursite_box">
                 <h3>AI ASSISTANT FOR CUSTOMER SERVICE</h3>
                 <p>
                   Eliminate unique customer frustrations and operational issues
@@ -193,10 +190,7 @@ const IndexSection = () => {
                 </p>
                 <button className="oursite_box_link">Learn More</button>
               </div>
-              <div className="w-[48%] p-3 oursite_box flex flex-col relative group">
-                <div className="image_wrapper">
-                  <img src={AI_image} alt="Icon" className="hover_image" />
-                </div>
+              <div className="w-[48%] oursite_box">
                 <h3>AI WORKFORCE FOR BUSINESS OPERATIONS</h3>
                 <p>
                   Imagine a workplace where challenges are met head-on,

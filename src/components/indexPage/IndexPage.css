@@ -342,6 +342,7 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  text-transform: uppercase;
   justify-content: space-between;
   margin: 15px 0px;
 }
@@ -453,6 +454,7 @@
   text-align: left;
   text-underline-position: from-font;
   text-decoration-skip-ink: none;
+  text-transform: uppercase;
   color: rgba(219, 139, 54, 1);
 }
 .goalwrapper {
@@ -597,6 +599,7 @@
   text-align: left;
   text-underline-position: from-font;
   text-decoration-skip-ink: none;
+  text-transform: uppercase;
   color: rgba(219, 139, 54, 1);
 }
 
@@ -622,6 +625,8 @@
   text-align: left;
   color: rgba(206, 206, 206, 1);
   transition: all 0.3s ease; /* Smooth transition for text change */
+  max-width: 50%;
+  /* background-color: red; */
 }
 
 .partner_section > span {

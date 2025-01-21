@@ -8,7 +8,7 @@ import fourthIcon1 from "../../assets/fourthIcon1.png";
 import fourthIcon2 from "../../assets/fourthIcon2.png";
 import fourthIcon3 from "../../assets/fourthIcon3.png";
 import AI_image from "../../assets/AI_image.png";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import goalicon1 from "../../assets/goalicon1.png";
 import goalicon2 from "../../assets/goalicon2.png";
 import goalicon3 from "../../assets/goalicon3.png";
@@ -63,6 +63,41 @@ const PartnerSection = ({ number, heading, content }) => {
 };
 
 const IndexSection = () => {
+  const [IsMenuVisible, setIsMenuVisible] = useState(false);
+  const navigate = useNavigate();
+  const closemenuHandler = () => {
+    setIsMenuVisible(!IsMenuVisible);
+  };
+
+  const openmenuHandler = () => {
+    setIsMenuVisible(!IsMenuVisible);
+  };
+
+  const Navigate_Home = () => {
+    setIsMenuVisible(!IsMenuVisible);
+    navigate("/");
+  };
+
+  const Navigate_AboutUs = () => {
+    setIsMenuVisible(!IsMenuVisible);
+    navigate("/AboutUs");
+  };
+
+  const Navigate_ContactUs = () => {
+    setIsMenuVisible(!IsMenuVisible);
+    navigate("/ContactUs");
+  };
+
+  const Navigate_FrontendPage = () => {
+    setIsMenuVisible(!IsMenuVisible);
+    navigate("/FrontendPage");
+  };
+
+  const Navigate_BackendPage = () => {
+    setIsMenuVisible(!IsMenuVisible);
+    navigate("/BackendPage");
+  };
+
   return (
     <Scroll html className="w-full">
       <div className="Main_Layout_Container relative">
@@ -76,9 +111,10 @@ const IndexSection = () => {
                 </h3>
               </div>
               <img
+                onClick={openmenuHandler}
                 src={menusymbol}
                 alt="menusymbol"
-                className="w-8 text-black-800"
+                className="w-8 text-black-800 cursor-pointer"
               />
             </section>
             <h1 className="frontheading">Reinvent</h1>
@@ -369,7 +405,10 @@ const IndexSection = () => {
               <h3 className="my-4">Get in Touch with us </h3>
               <div className="px-5 w-full">
                 <div className="footer_input_container">
-                  <input className="footer_input" placeholder="Your Email" />
+                  <input
+                    className="footer_input font-poppins font-semibold"
+                    placeholder="Your Email"
+                  />
                   <span>
                     <i class="bi bi-arrow-right"></i>
                   </span>
@@ -378,6 +417,35 @@ const IndexSection = () => {
             </div>
           </div>
         </Section>
+
+        <div className={`menu_container ${IsMenuVisible ? "open" : ""}`}>
+          <div className="w-full px-10 py-8 flex justify-between items-center">
+            <img src={logoimage} alt="logoimage" className="w-16 " />
+            <span
+              onClick={closemenuHandler}
+              className="text-2xl mx-2 font-bold font-poppins text-black cursor-pointer "
+            >
+              <i className="bi bi-x-lg"></i>
+            </span>
+          </div>
+          <div className="w-full px-12 py-8 flex flex-col justify-evenly items-start">
+            <button onClick={Navigate_Home} className="menu_link">
+              HOME
+            </button>
+            <button onClick={Navigate_AboutUs} className="menu_link">
+              About Us
+            </button>
+            <button onClick={Navigate_ContactUs} className="menu_link">
+              Contact us
+            </button>
+            <button onClick={Navigate_FrontendPage} className="menu_link">
+              AI ASSISTANT FOR CUSTOMER SUPPORT
+            </button>
+            <button onClick={Navigate_BackendPage} className="menu_link">
+              AI Workforce for Backend Operations
+            </button>
+          </div>
+        </div>
       </div>
     </Scroll>
   );

@@ -1,5 +1,5 @@
 import { Scroll } from "@react-three/drei";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import logoimage from "../../assets/Logo_image.png";
 import menusymbol from "../../assets/menusymbol.png";
 import { useNavigate } from "react-router-dom";
@@ -16,38 +16,52 @@ const Section = (props) => {
 
 const FrontendPageSection = () => {
   const [IsMenuVisible, setIsMenuVisible] = useState(false);
+  const [isShowoverlay, setisShowoverlay] = useState(false);
   const navigate = useNavigate();
-
   const closemenuHandler = () => {
-    setIsMenuVisible(!IsMenuVisible);
+    setisShowoverlay(true);
+    setTimeout(() => {
+      setIsMenuVisible(!IsMenuVisible);
+    }, 500);
   };
 
   const openmenuHandler = () => {
-    setIsMenuVisible(!IsMenuVisible);
+    setisShowoverlay(true);
+    setTimeout(() => {
+      setIsMenuVisible(!IsMenuVisible);
+    }, 500);
   };
 
+  useEffect(() => {
+    if (isShowoverlay) {
+      setTimeout(() => {
+        setisShowoverlay(false);
+      }, 1000);
+    }
+  }, [isShowoverlay]);
+
   const Navigate_Home = () => {
-    setIsMenuVisible(!IsMenuVisible);
+    closemenuHandler();
     navigate("/");
   };
 
   const Navigate_AboutUs = () => {
-    setIsMenuVisible(!IsMenuVisible);
+    closemenuHandler();
     navigate("/AboutUs");
   };
 
   const Navigate_ContactUs = () => {
-    setIsMenuVisible(!IsMenuVisible);
+    closemenuHandler();
     navigate("/ContactUs");
   };
 
   const Navigate_FrontendPage = () => {
-    setIsMenuVisible(!IsMenuVisible);
+    closemenuHandler();
     navigate("/FrontendPage");
   };
 
   const Navigate_BackendPage = () => {
-    setIsMenuVisible(!IsMenuVisible);
+    closemenuHandler();
     navigate("/BackendPage");
   };
 
@@ -69,8 +83,12 @@ const FrontendPageSection = () => {
               className="w-8 text-black-800 cursor-pointer"
             />
           </section>
-          <div className="w-full bg-red-500 flex h-full justify-center font-poppins items-center">FRONTEND PAGE</div>
+          <div className="w-full bg-red-500 flex h-full justify-center font-poppins items-center">
+            FRONTEND PAGE
+          </div>
         </Section>
+        <div className={`menu_overlay ${isShowoverlay ? "open" : ""}`}></div>
+
         <div className={`menu_container ${IsMenuVisible ? "open" : ""}`}>
           <div className="w-full px-10 py-8 flex justify-between items-center">
             <img src={logoimage} alt="logoimage" className="w-16 " />

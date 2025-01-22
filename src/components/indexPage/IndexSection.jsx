@@ -149,7 +149,7 @@ const IndexSection = () => {
               <h3 className="secondsectionheading">REINVENTION</h3>
               <h4 className="secondsectionsubheading">STRATEGY FOR SUCCESS</h4>
               <p className="secondsectionsubpara">
-                The rate of change affecting businesses has risen over 183% in
+                The rate of change affecting businesses has risen over 182% in
                 the last 4 years. To counter this, 83% of organisations have
                 accelerated the execution of reinvention with GenAI.
               </p>

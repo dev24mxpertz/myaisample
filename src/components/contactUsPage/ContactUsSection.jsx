@@ -6,8 +6,8 @@ import { useNavigate } from "react-router-dom";
 
 const Section = (props) => {
   return (
-    <section className="w-full h-screen px-16 flex flex-col justify-start items-center">
-      <div className="w-full h-full flex flex-col justify-evenly max-w-[1300px]">
+    <section className="w-full paddinghori16 flex flex-col justify-start items-center">
+      <div className="w-full h-full flex flex-col max-w-[1300px] bgdiv ">
         {props.children}
       </div>
     </section>
@@ -82,8 +82,8 @@ const ContactUsSection = () => {
               className="w-8 text-black-800 cursor-pointer"
             />
           </section>
-          <div className="w-full flex h-full justify-between items-center">
-            <div className="flex flex-col justify-start w-[25%] max-h-max footersection">
+          <div className=" footer_maindiv">
+            <div className="flex flex-col justify-start max-h-max footersection">
               <img
                 src={logoimage}
                 alt="logo_image"
@@ -106,7 +106,7 @@ const ContactUsSection = () => {
             </div>
             <div className="flex flex-col w-[35%] max-h-max  footersection">
               <h3 className="my-4">Get in Touch with us </h3>
-              <div className="px-3 ml-2 w-full">
+              <div className="px-5 w-full">
                 <div className="footer_input_container">
                   <input
                     className="footer_input font-poppins font-semibold"

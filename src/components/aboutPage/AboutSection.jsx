@@ -6,8 +6,8 @@ import { useNavigate } from "react-router-dom";
 
 const Section = (props) => {
   return (
-    <section className="w-full h-screen px-16 flex flex-col justify-start items-center">
-      <div className="w-full h-full flex flex-col justify-evenly max-w-[1300px]">
+    <section className="w-full paddinghori16 flex flex-col justify-start items-center">
+      <div className="w-full h-full flex flex-col max-w-[1300px] bgdiv ">
         {props.children}
       </div>
     </section>
@@ -116,7 +116,7 @@ const AboutSection = () => {
             <h2 className="About_Section_heading2">
               With Bespoke AI Solutions
             </h2>
-            <div className="flex items-center gap-3 ">
+            <div className=" About_Sectionflex1">
               <p className="About_Section_para">
                 We collaborate with businesses as strategic partners, offering
                 insightful consulting to uncover obstacles, seize opportunities,
@@ -138,7 +138,7 @@ const AboutSection = () => {
         <Section>
           <div className="w-full h-full flex flex-col items-start justify-center">
             <h2 className="About_Section_heading3">Who are we?</h2>
-            <div className="flex items-center gap-3">
+            <div className="About_Sectionflex2">
               <p className="About_Section_para">
                 We are a UK-based GenAI company of passionate professionals
                 dedicated to solving business challenges with AI reinvention.
@@ -155,15 +155,15 @@ const AboutSection = () => {
           </div>
         </Section>
         <Section>
-          <div className="w-full h-full flex items-center justify-between gap-3">
-            <div className="w-[35%] h-full flex justify-start flex-col ">
+          <div className="About_Sectionflex3">
+            <div className="About_Sectionflexsub3">
               <h2 className="About_Section_heading4">Vision</h2>
               <p className="About_Section_para2">
                 Our vision is to create a future where technology and humanity
                 coexist symbiotically.
               </p>
             </div>
-            <div className="w-[55%] h-full flex justify-start py-4 flex-col ">
+            <div className=" About_Sectionflexsub3_2 ">
               <p className="About_Section_para3">
                 We want to create a world where technology and humanity thrive
                 together, unlocking infinit possibilities for innovation,
@@ -181,8 +181,8 @@ const AboutSection = () => {
           </div>
         </Section>
         <Section>
-          <div className="w-full h-full flex items-center justify-between gap-3">
-            <div className="w-[35%] h-full flex justify-start flex-col ">
+          <div className="About_Sectionflex3">
+            <div className="About_Sectionflexsub3">
               <h2 className="About_Section_heading4">Mission</h2>
               <p className="About_Section_para2">
                 Our mission is to transform businesses through tailored AI
@@ -190,7 +190,7 @@ const AboutSection = () => {
                 opportunities.
               </p>
             </div>
-            <div className="w-[55%] h-full flex justify-start py-4 flex-col ">
+            <div className="About_Sectionflexsub3_2">
               <p className="About_Section_para3">
                 At our core, we empower businesses to embrace the transformative
                 potential of artificial intelligence. Through custom-tailored
@@ -216,7 +216,7 @@ const AboutSection = () => {
               We start with an in-depth consultation to understand your business
               objectives, challenges, and current processes.
             </p>
-            <div className="w-full py-6  flex gap-2 justify-between items-stretch">
+            <div className="About_Sectionflex4">
               <PartnerSection
                 heading="ONGOING SUPPORT AND OPTIMISAION"
                 content="We provide regular updates, ongoing support, and continuous optimisation to ensure your unique challenges are always addressed, and our AI solutions continue delivering value as your business grows."

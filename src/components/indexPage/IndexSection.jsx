@@ -17,8 +17,8 @@ import goalicon5 from "../../assets/goalicon5.png";
 
 const Section = (props) => {
   return (
-    <section className="w-full h-screen px-16 flex flex-col justify-start items-center">
-      <div className="w-full h-full flex flex-col justify-evenly max-w-[1300px]">
+    <section className="w-full paddinghori16 flex flex-col justify-start items-center">
+      <div className="w-full h-full flex flex-col max-w-[1300px] bgdiv ">
         {props.children}
       </div>
     </section>
@@ -27,7 +27,7 @@ const Section = (props) => {
 
 const BlackSection = (props) => {
   return (
-    <section className="w-full h-screen px-16 flex bg-black flex-col justify-start items-center">
+    <section className="w-full BLACKpaddinghori16 flex bg-black flex-col justify-start items-center">
       <div className="w-full h-full flex justify-end items-center   max-w-[1300px]">
         {props.children}
       </div>
@@ -149,7 +149,7 @@ const IndexSection = () => {
               <h3 className="secondsectionheading">REINVENTION</h3>
               <h4 className="secondsectionsubheading">STRATEGY FOR SUCCESS</h4>
               <p className="secondsectionsubpara">
-                The rate of change affecting businesses has risen over 182% in
+                The rate of change affecting businesses has risen over 183% in
                 the last 4 years. To counter this, 83% of organisations have
                 accelerated the execution of reinvention with GenAI.
               </p>
@@ -157,7 +157,7 @@ const IndexSection = () => {
             <p className="secondsectionpara">
               in less than half the time against competitors
             </p>
-            <div className="p-2 w-full flex justify-center items-stretch ">
+            <div className="  firstflexidv ">
               <div className="px-4 py-4 flex flex-col mx-2 items-center justify-evenly subboxshadow rounded-md w-1/4">
                 <img
                   src={secondsectionimage1}
@@ -186,7 +186,7 @@ const IndexSection = () => {
         <Section>
           <div className="w-full py-16">
             <h1 className="thirdSectionheading">GEN AI IN ACTION</h1>
-            <div className="w-full  p-2 flex items-center gap-x-1.5 justify-between">
+            <div className="secondflexidv">
               <div className="w-1/3 px-4 py-4 bg-orange-700 fourthbox relative">
                 <img src={fourthIcon1} alt="fourthIcon1" />
                 <h3 className="fourthboxheading">3M</h3>
@@ -231,8 +231,8 @@ const IndexSection = () => {
         <Section>
           <div className="w-full py-8 ">
             <h1 className="fouthSectionheading">Our suite of Solutions</h1>
-            <div className="w-full p-2 flex justify-between gap-3 items-stretch">
-              <div className="w-[48%] oursite_box">
+            <div className=" thirdflexidv">
+              <div className=" oursite_box">
                 <h3>AI ASSISTANT FOR CUSTOMER SERVICE</h3>
                 <p>
                   Eliminate unique customer frustrations and operational issues
@@ -243,7 +243,7 @@ const IndexSection = () => {
                 </p>
                 <button className="oursite_box_link">Learn More</button>
               </div>
-              <div className="w-[48%] oursite_box">
+              <div className="oursite_box">
                 <h3>AI WORKFORCE FOR BUSINESS OPERATIONS</h3>
                 <p>
                   Imagine a workplace where challenges are met head-on,
@@ -261,8 +261,8 @@ const IndexSection = () => {
             <h3 className="goalachieve_heading">
               Achieve Your Goals <br /> with Altus Solutions
             </h3>
-            <div className="w-full flex justify-between gap-3 items-stretch">
-              <div className="w-[85%] flex">
+            <div className="fourthflexidv">
+              <div className="w_85">
                 <div className="goalwrapper w-full goalwrapper_padding flex flex-col justify-between">
                   <h3>BOOST YOUR SUCCESS</h3>
                   <p>
@@ -302,7 +302,7 @@ const IndexSection = () => {
                 </div>
               </div>
             </div>
-            <div className="flex gap-3 mt-2">
+            <div className="fouthsubflexdiv">
               <div className="goalwrapper flex flex-col justify-center">
                 <h3>
                   EMPOWERED <br />
@@ -360,7 +360,7 @@ const IndexSection = () => {
             <h3 className="partner_heading">
               Partner with Us to <br /> Realize Your Vision
             </h3>
-            <div className="w-full p-2 flex gap-2 justify-between items-stretch">
+            <div className="fifthflexidv">
               <PartnerSection
                 number={1}
                 heading="Expertise"
@@ -385,7 +385,7 @@ const IndexSection = () => {
           </div>
         </Section>
         <BlackSection>
-          <div className="w-[65%] h-full flex flex-col items-start justify-evenly  ">
+          <div className=" blackflexdiv  ">
             <h3 className="logo_subheading">
               Your bold idea, our smart solutions
             </h3>
@@ -394,8 +394,8 @@ const IndexSection = () => {
           </div>
         </BlackSection>
         <Section>
-          <div className="w-full flex px-2 h-full justify-between items-center">
-            <div className="flex flex-col justify-start w-[25%] max-h-max footersection">
+          <div className=" footer_maindiv">
+            <div className="flex flex-col justify-start max-h-max footersection">
               <img
                 src={logoimage}
                 alt="logo_image"

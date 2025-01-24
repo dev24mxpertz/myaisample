@@ -979,6 +979,9 @@ justify-content: space-between;
 align-items: center;
 }
 
+
+
+
 /* flex gap-3 mt-2 */
 @media (min-width: 0px) and (max-width: 600px) {
   .paddinghori16 {

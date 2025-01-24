@@ -8,7 +8,7 @@ const IndexCanva = () => {
 
   useEffect(() => {
     const handleResize = () => {
-      setIsMobile(window.innerWidth <= 768); // You can adjust this breakpoint as needed
+      setIsMobile(window.innerWidth <= 768); // Adjust for mobile screens
     };
 
     handleResize(); // Check on mount
@@ -23,7 +23,11 @@ const IndexCanva = () => {
     <>
       <ambientLight intensity={1} />
       <directionalLight position={[5, 5, 5]} />
-      <OrbitControls enableZoom={false} />
+      <OrbitControls
+        enableZoom={false}
+        enableRotate={!isMobile}
+        enablePan={true}
+      />
       <ScrollControls pages={isMobile ? 9.6 : 8} damping={1.25}>
         <Scroll>
           <IndexSection />

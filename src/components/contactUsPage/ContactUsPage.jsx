@@ -1,9 +1,10 @@
-import { Canvas } from '@react-three/fiber';
-import React from 'react'
-import ContactUsCanva from './ContactUsCanva';
+import { Canvas } from "@react-three/fiber";
+import React from "react";
+import ContactUsCanva from "./ContactUsCanva";
 
 const ContactUsPage = () => {
-    return (
+  return (
+    <div className="canvas-container">
       <Canvas
         camera={{
           fov: 64,
@@ -13,7 +14,8 @@ const ContactUsPage = () => {
       >
         <ContactUsCanva />
       </Canvas>
-    );
-}
+    </div>
+  );
+};
 
-export default ContactUsPage
+export default ContactUsPage;

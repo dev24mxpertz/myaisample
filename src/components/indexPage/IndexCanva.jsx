@@ -8,14 +8,14 @@ const IndexCanva = () => {
 
   useEffect(() => {
     const handleResize = () => {
-      setIsMobile(window.innerWidth <= 768); // Adjust for mobile screens
+      setIsMobile(window.innerWidth <= 768);
     };
 
     handleResize(); // Check on mount
-    window.addEventListener("resize", handleResize); // Listen for window resize events
+    window.addEventListener("resize", handleResize);
 
     return () => {
-      window.removeEventListener("resize", handleResize); // Cleanup on unmount
+      window.removeEventListener("resize", handleResize);
     };
   }, []);
 
@@ -28,7 +28,7 @@ const IndexCanva = () => {
         enableRotate={!isMobile}
         enablePan={true}
       />
-      <ScrollControls pages={isMobile ? 9.6 : 8} damping={1.25}>
+      <ScrollControls pages={isMobile ? 13 : 8} damping={1.25}>
         <Scroll>
           <IndexSection />
           <CombinedMeshes position={[0, 0, -3]} />

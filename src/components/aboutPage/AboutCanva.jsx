@@ -24,7 +24,7 @@ const AboutCanva = () => {
       <ambientLight intensity={1} />
       <directionalLight position={[5, 5, 5]} />
       <OrbitControls enableZoom={false} />
-      <ScrollControls pages={isMobile ? 7.4 : 5} damping={1.25}>
+      <ScrollControls pages={isMobile ? 7 : 5.2} damping={1.25}>
         <Scroll>
           <AboutSection />
           <CombinedMeshes position={[0, 0, -3]} />

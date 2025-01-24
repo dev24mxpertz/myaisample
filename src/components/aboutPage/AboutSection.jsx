@@ -3,21 +3,21 @@ import React, { useEffect, useState } from "react";
 import logoimage from "../../assets/Logo_image.png";
 import menusymbol from "../../assets/menusymbol.png";
 import { useNavigate } from "react-router-dom";
-
+import { motion } from "framer-motion";
 const Section = (props) => {
   return (
-    <section className="w-full paddinghori16 flex flex-col justify-start items-center">
-      <div className="w-full h-full flex flex-col max-w-[1300px] bgdiv ">
+    <section className="w-full paddinghori16 flex flex-col items-center">
+      <div className="w-full h-full flex flex-col justify-evenly max-w-[1300px] bgdiv ">
         {props.children}
       </div>
     </section>
   );
 };
 
+
 const PartnerSection = ({ heading, content }) => {
   const [isHovered, setIsHovered] = useState(false);
 
-  // Event handlers for hover
   const handleMouseEnter = () => setIsHovered(true);
   const handleMouseLeave = () => setIsHovered(false);
 
@@ -27,18 +27,35 @@ const PartnerSection = ({ heading, content }) => {
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
-      <span className="partner_arrow2">
+      <motion.span
+        className="partner_arrow2"
+        animate={{ rotate: isHovered ? 180 : 45 }}
+        transition={{ duration: 0.3 }}
+      >
         <i className={`bi bi-arrow-up ${isHovered ? "rotated" : ""}`}></i>
-      </span>
-      <h3>
+      </motion.span>
+
+      <motion.h3
+        initial={{ opacity: 0 }}
+        animate={{ opacity: isHovered ? 1 : 0.7 }}
+        transition={{ duration: 0.3 }}
+      >
         {isHovered
           ? "Your success is our priority, now and in the future."
           : "How We Work?"}
-      </h3>
-      <p>{isHovered ? content : heading}</p>
+      </motion.h3>
+
+      <motion.p
+        initial={{ opacity: 0 }}
+        animate={{ opacity: isHovered ? 1 : 0.7 }}
+        transition={{ duration: 0.3 }}
+      >
+        {isHovered ? content : heading}
+      </motion.p>
     </div>
   );
 };
+
 
 const AboutSection = () => {
   const [IsMenuVisible, setIsMenuVisible] = useState(false);
@@ -96,107 +113,223 @@ const AboutSection = () => {
       <div className="Main_Layout_Container relative">
         <Section>
           <section className="py-16 flex justify-between items-center">
-            <div className="flex">
-              <img src={logoimage} alt="logoimage" className="w-16" />
-              <h3 className="text-2xl mx-2 font-semibold leading-10 decoration-from-font decoration-skip-ink logo-text-color ">
+            <motion.div
+              className="flex"
+              initial={{ opacity: 0, x: -50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, amount: 0.3 }}
+              transition={{ duration: 1 }}
+            >
+              <motion.img
+                src={logoimage}
+                alt="logoimage"
+                className="w-16"
+                initial={{ opacity: 0, y: -50 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 1 }}
+              />
+              <motion.h3
+                className="text-2xl mx-2 font-semibold leading-10 decoration-from-font decoration-skip-ink logo-text-color"
+                initial={{ opacity: 0, x: -50 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 1, delay: 0.2 }}
+              >
                 ALTUS
-              </h3>
-            </div>
-            <img
+              </motion.h3>
+            </motion.div>
+
+            <motion.img
               onClick={openmenuHandler}
               src={menusymbol}
               alt="menusymbol"
               className="w-8 text-black-800 cursor-pointer"
+              initial={{ opacity: 0, rotate: 45 }}
+              whileInView={{ opacity: 1, rotate: 0 }}
+              transition={{ duration: 0.8, delay: 0.4 }}
             />
           </section>
+
           <div className="w-full h-full flex flex-col items-start justify-center">
-            <h1 className="About_Section_heading1">
+            <motion.h1
+              className="About_Section_heading1"
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.3 }}
+              transition={{ duration: 1 }}
+            >
               Transforming Value Chains, Solving Challenges
-            </h1>
-            <h2 className="About_Section_heading2">
+            </motion.h1>
+
+            <motion.h2
+              className="About_Section_heading2"
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.3 }}
+              transition={{ duration: 1, delay: 0.2 }}
+            >
               With Bespoke AI Solutions
-            </h2>
-            <div className=" About_Sectionflex1">
-              <p className="About_Section_para">
+            </motion.h2>
+
+            <div className="About_Sectionflex1">
+              <motion.p
+                className="About_Section_para"
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.3 }}
+                transition={{ duration: 1, delay: 0.4 }}
+              >
                 We collaborate with businesses as strategic partners, offering
                 insightful consulting to uncover obstacles, seize opportunities,
                 and craft bespoke AI solutions. Our approach doesn’t just solve
-                challenges or mitigate risks it reinvents your value chain,
+                challenges or mitigate risks—it reinvents your value chain,
                 empowering your team to focus on innovation and high-impact
                 work.
-              </p>
-              <p className="About_Section_para">
+              </motion.p>
+
+              <motion.p
+                className="About_Section_para"
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.3 }}
+                transition={{ duration: 1, delay: 0.6 }}
+              >
                 Specializing in AI consulting, we design tailored solutions to
                 address unique business needs, streamline both front-end and
                 back-end operations, and eliminate inefficiencies. Helping you
-                unlock the potential fo sustainable growth and unparalleled
+                unlock the potential for sustainable growth and unparalleled
                 efficiency.
-              </p>
+              </motion.p>
             </div>
           </div>
         </Section>
         <Section>
           <div className="w-full h-full flex flex-col items-start justify-center">
-            <h2 className="About_Section_heading3">Who are we?</h2>
+            <motion.h2
+              className="About_Section_heading3"
+              initial={{ opacity: 0, x: -50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, amount: 0.3 }}
+              transition={{ duration: 1 }}
+            >
+              Who are we?
+            </motion.h2>
+
             <div className="About_Sectionflex2">
-              <p className="About_Section_para">
+              <motion.p
+                className="About_Section_para"
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.3 }}
+                transition={{ duration: 1, delay: 0.2 }}
+              >
                 We are a UK-based GenAI company of passionate professionals
                 dedicated to solving business challenges with AI reinvention.
                 With a client-first approach and a relentless focus on results,
                 we deliver strategic consulting and custom AI solutions to help
                 businesses achieve operational excellence.
-              </p>
-              <p className="About_Section_para">
+              </motion.p>
+
+              <motion.p
+                className="About_Section_para"
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.3 }}
+                transition={{ duration: 1, delay: 0.4 }}
+              >
                 We believe in AI's transformative power to overcome challenges,
                 drive growth, empower teams, and enhance productivity, enabling
-                businesses to achieve their goals and unlock new possibilities
-              </p>
+                businesses to achieve their goals and unlock new possibilities.
+              </motion.p>
             </div>
           </div>
         </Section>
         <Section>
           <div className="About_Sectionflex3">
             <div className="About_Sectionflexsub3">
-              <h2 className="About_Section_heading4">Vision</h2>
-              <p className="About_Section_para2">
+              <motion.h2
+                className="About_Section_heading4"
+                initial={{ opacity: 0, x: -50 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true, amount: 0.3 }}
+                transition={{ duration: 1 }}
+              >
+                Vision
+              </motion.h2>
+
+              <motion.p
+                className="About_Section_para2"
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.3 }}
+                transition={{ duration: 1, delay: 0.2 }}
+              >
                 Our vision is to create a future where technology and humanity
                 coexist symbiotically.
-              </p>
+              </motion.p>
             </div>
-            <div className=" About_Sectionflexsub3_2 ">
-              <p className="About_Section_para3">
+
+            <div className="About_Sectionflexsub3_2">
+              <motion.p
+                className="About_Section_para3"
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.3 }}
+                transition={{ duration: 1, delay: 0.4 }}
+              >
                 We want to create a world where technology and humanity thrive
-                together, unlocking infinit possibilities for innovation,
+                together, unlocking infinite possibilities for innovation,
                 growth, and sustainability. We strive to build work environments
                 that inspire creativity, amplify human potential, and pave the
                 way for a brighter, AI-driven future. We envision a world where
                 businesses thrive by fostering work environments that empower
                 people and enable them to achieve their fullest potential,
-                amplified by the transformative power of artific intelligence.
-                We aspire to bridge the gap between human creativity and AI’s
-                limitless capacity to innovate, ensuring a sustainable and
-                prosperous future for Businesses, Employees, and Customers.
-              </p>
+                amplified by the transformative power of artificial
+                intelligence. We aspire to bridge the gap between human
+                creativity and AI’s limitless capacity to innovate, ensuring a
+                sustainable and prosperous future for Businesses, Employees, and
+                Customers.
+              </motion.p>
             </div>
           </div>
         </Section>
         <Section>
           <div className="About_Sectionflex3">
             <div className="About_Sectionflexsub3">
-              <h2 className="About_Section_heading4">Mission</h2>
-              <p className="About_Section_para2">
+              <motion.h2
+                className="About_Section_heading4"
+                initial={{ opacity: 0, x: -50 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true, amount: 0.3 }}
+                transition={{ duration: 1 }}
+              >
+                Mission
+              </motion.h2>
+
+              <motion.p
+                className="About_Section_para2"
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.3 }}
+                transition={{ duration: 1, delay: 0.2 }}
+              >
                 Our mission is to transform businesses through tailored AI
                 solutions that don’t just solve problems but create new
                 opportunities.
-              </p>
+              </motion.p>
             </div>
             <div className="About_Sectionflexsub3_2">
-              <p className="About_Section_para3">
+              <motion.p
+                className="About_Section_para3"
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.3 }}
+                transition={{ duration: 1, delay: 0.4 }}
+              >
                 At our core, we empower businesses to embrace the transformative
                 potential of artificial intelligence. Through custom-tailored
                 solutions, we address unique challenges, streamline
                 inefficiencies, and elevate workforce capabilities. Guided by a
-                commitment to innovation an sustainability, we aim to reimagine
+                commitment to innovation and sustainability, we aim to reimagine
                 industries, deliver exceptional value, and shape a future where
                 AI works for humanity. We aim to address inefficiencies, elevate
                 productivity, and empower workforces to focus on high-value
@@ -205,17 +338,33 @@ const AboutSection = () => {
                 scalable, secure, and sustainable solutions that fuel
                 innovation, enhance employee satisfaction, and ensure long-term
                 growth.
-              </p>
+              </motion.p>
             </div>
           </div>
         </Section>
         <Section>
           <div className="w-full h-full p-2 flex flex-col justify-evenly">
-            <h2 className="About_Section_heading5">HOW WE WORK?</h2>
-            <p className="About_Section_para4">
+            <motion.h2
+              className="About_Section_heading5"
+              initial={{ opacity: 0, y: -30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.3 }}
+              transition={{ duration: 1 }}
+            >
+              HOW WE WORK?
+            </motion.h2>
+
+            <motion.p
+              className="About_Section_para4"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.3 }}
+              transition={{ duration: 1, delay: 0.2 }}
+            >
               We start with an in-depth consultation to understand your business
               objectives, challenges, and current processes.
-            </p>
+            </motion.p>
+
             <div className="About_Sectionflex4">
               <PartnerSection
                 heading="ONGOING SUPPORT AND OPTIMISAION"

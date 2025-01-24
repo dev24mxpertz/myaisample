@@ -9,7 +9,7 @@ import { Mounta } from "./Mounta";
 import { Mountb } from "./Mountb";
 import { Mountc } from "./Mountc";
 import { Mountd } from "./Mountd";
-import firsttexture from "../assets/blacktexture.avif";
+import firsttexture from "../assets/blacktexture.jpg";
 import orangestriplinetexture from "../assets/orangestriplinetexture.jpg";
 
 const Floor_Height = 10;

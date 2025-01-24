@@ -23,11 +23,7 @@ const IndexCanva = () => {
     <>
       <ambientLight intensity={1} />
       <directionalLight position={[5, 5, 5]} />
-      <OrbitControls
-        enableZoom={false}
-        enableRotate={!isMobile}
-        enablePan={true}
-      />
+      <OrbitControls enableZoom={false} />
       <ScrollControls pages={isMobile ? 13 : 8} damping={1.25}>
         <Scroll>
           <IndexSection />

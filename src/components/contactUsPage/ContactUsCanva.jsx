@@ -25,6 +25,8 @@ const ContactUsCanva = () => {
       <directionalLight position={[5, 5, 5]} />
       <OrbitControls enableZoom={false} />
       <ScrollControls pages={isMobile ? 1.2 : 1} damping={1.25}>
+        {" "}
+        {/* Set pages to 2 for mobile */}
         <Scroll>
           <ContactUsSection />
           <CombinedMeshes position={[0, 0, -18]} />

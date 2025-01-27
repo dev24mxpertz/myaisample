@@ -4,27 +4,12 @@ import { CombinedMeshes } from "../CombinedMeshes";
 import AboutSection from "./AboutSection";
 
 const AboutCanva = () => {
-  const [isMobile, setIsMobile] = useState(false);
-
-  useEffect(() => {
-    const handleResize = () => {
-      setIsMobile(window.innerWidth <= 768);
-    };
-
-    handleResize();
-    window.addEventListener("resize", handleResize);
-
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
-
   return (
     <>
       <ambientLight intensity={1} />
       <directionalLight position={[5, 5, 5]} />
       <OrbitControls enableZoom={false} />
-      <ScrollControls pages={isMobile ? 9 : 5.2} damping={1.25}>
+      <ScrollControls pages={7} damping={1.25}>
         <Scroll>
           <AboutSection />
           <CombinedMeshes position={[0, 0, -3]} />

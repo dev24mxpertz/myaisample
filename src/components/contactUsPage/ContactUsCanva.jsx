@@ -2,6 +2,9 @@ import React, { useState, useEffect } from "react";
 import { OrbitControls, Scroll, ScrollControls } from "@react-three/drei";
 import ContactUsSection from "./ContactUsSection";
 import { CombinedMeshes } from "../CombinedMeshes";
+import logoimage from "../../assets/Logo_image.png";
+import menusymbol from "../../assets/menusymbol.png";
+import { motion } from "framer-motion";
 
 const ContactUsCanva = () => {
   const [isMobile, setIsMobile] = useState(false);
@@ -25,8 +28,6 @@ const ContactUsCanva = () => {
       <directionalLight position={[5, 5, 5]} />
       <OrbitControls enableZoom={false} />
       <ScrollControls pages={isMobile ? 1.2 : 1} damping={1.25}>
-        {" "}
-        {/* Set pages to 2 for mobile */}
         <Scroll>
           <ContactUsSection />
           <CombinedMeshes position={[0, 0, -18]} />

@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { OrbitControls, Scroll, ScrollControls } from "@react-three/drei";
-import IndexSection from "./IndexSection";
 import { CombinedMeshes } from "../CombinedMeshes";
+import IndexSection from "./IndexSection";
 
 const IndexCanva = () => {
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
     const handleResize = () => {
-      setIsMobile(window.innerWidth <= 768); // Adjust for mobile screens
+      setIsMobile(window.innerWidth <= 768); // You can adjust this breakpoint as needed
     };
 
     handleResize(); // Check on mount
@@ -23,11 +23,7 @@ const IndexCanva = () => {
     <>
       <ambientLight intensity={1} />
       <directionalLight position={[5, 5, 5]} />
-      <OrbitControls
-        enableZoom={false}
-        enableRotate={!isMobile}
-        enablePan={true}
-      />
+      <OrbitControls enableZoom={false} />
       <ScrollControls pages={isMobile ? 9.6 : 8} damping={1.25}>
         <Scroll>
           <IndexSection />

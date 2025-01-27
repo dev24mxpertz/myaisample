@@ -13,15 +13,10 @@ body {
 
 #root {
   width: 100vw;
-  height: calc(var(--vh, 1vh) * 100);
-} 
+  height: 100vh;
+}
 
 .Main_Layout_Container {
   position: relative;
   width: 100%;
-}
-
-.canvas-container {
-  width: 100%;
-  height: 100%;
 }

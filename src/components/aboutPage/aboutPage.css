@@ -62,7 +62,7 @@
 .About_Section_para2 {
   font-family: Open Sans;
   font-size: 40px;
-  font-weight: 700;
+  font-weight: 500;
   line-height: 54.47px;
   text-align: left;
   text-underline-position: from-font;
@@ -129,9 +129,10 @@
   font-weight: 700;
   line-height: 40px;
   text-align: left;
-  width: 60%;
+  width: 65%;
   color: rgba(206, 206, 206, 1);
   transition: all 0.3s ease;
+  text-transform: uppercase;
 }
 
 .partner_section2 > span {
@@ -284,5 +285,9 @@
   }
   .partner_section2 {
     width: 100%;
+  }
+
+  .firstaboutsection{
+    margin-top: 100px;
   }
 }

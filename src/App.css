@@ -19,4 +19,12 @@ body {
 .Main_Layout_Container {
   position: relative;
   width: 100%;
+  overflow: hidden;
+  height: 100vh;
+}
+
+.bi-chevron-down::before {
+  content: "\f282";
+  line-height: 0.4;
+  color: rgba(219, 139, 54, 1);
 }

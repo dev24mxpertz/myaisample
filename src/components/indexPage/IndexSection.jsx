@@ -1,5 +1,5 @@
 import { Scroll } from "@react-three/drei";
-import React, { useState } from "react";
+import React, { forwardRef, useEffect, useRef, useState } from "react";
 import logoimage from "../../assets/Logo_image.png";
 import secondsectionimage1 from "../../assets/secondsectionimage1.png";
 import secondsectionimage2 from "../../assets/secondsectionimage2.png";
@@ -65,9 +65,35 @@ const PartnerSection = ({ number, heading, content }) => {
   );
 };
 
-const IndexSection = () => {
+const IndexSection = forwardRef((props, ref) => {
+  const localRef = useRef(null);
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (localRef.current) {
+        console.log(
+          localRef.current,
+          "Window resized. Current scroll container height:",
+          localRef.current.clientHeight
+        );
+      }
+    };
+
+    if (ref) {
+      ref.current = localRef.current;
+    }
+
+    window.addEventListener("resize", handleResize);
+
+    handleResize();
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, [ref, localRef]);
+
   return (
-    <Scroll html className="w-full">
+    <Scroll html className="w-full" ref={localRef}>
       <Section>
         <motion.h1
           className="frontheading animate-text"
@@ -767,6 +793,6 @@ const IndexSection = () => {
       </Section>
     </Scroll>
   );
-};
+});
 
 export default IndexSection;

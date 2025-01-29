@@ -1,5 +1,5 @@
 import { Scroll } from "@react-three/drei";
-import React, { useEffect, useState } from "react";
+import React, { forwardRef, useEffect, useRef, useState } from "react";
 import logoimage from "../../assets/Logo_image.png";
 import menusymbol from "../../assets/menusymbol.png";
 import { useNavigate } from "react-router-dom";
@@ -70,9 +70,37 @@ const PartnerSection = ({ heading, content }) => {
   );
 };
 
-const AboutSection = () => {
+const AboutSection = forwardRef((props, ref) => {
+  const localRef = useRef(null);
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (localRef.current) {
+        console.log(
+          localRef.current,
+          "Window resized. Current scroll container height:",
+          localRef.current.clientHeight
+        );
+      }
+    };
+
+    // Sync ref from parent
+    if (ref) {
+      ref.current = localRef.current;
+    }
+
+    window.addEventListener("resize", handleResize);
+
+    // Call handleResize once on mount
+    handleResize();
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, [ref]);
+
   return (
-    <Scroll html className="w-full">
+    <Scroll html className="w-full" ref={localRef}>
       <Section>
         <div className="w-full h-full flex flex-col items-start justify-center firstaboutsection ">
           <motion.h1
@@ -550,6 +578,6 @@ const AboutSection = () => {
       </Section>
     </Scroll>
   );
-};
+});
 
 export default AboutSection;

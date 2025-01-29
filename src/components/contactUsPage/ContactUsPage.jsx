@@ -1,76 +1,84 @@
 import { Canvas } from "@react-three/fiber";
-import React, { useEffect, useState } from "react";
+import React, { useState, useRef, useLayoutEffect, useEffect } from "react";
 import { OrbitControls, Scroll, ScrollControls } from "@react-three/drei";
 import ContactUsSection from "./ContactUsSection";
 import { CombinedMeshes } from "../CombinedMeshes";
 import Menu from "../menuPage/Menu";
-import logoimage from "../../assets/Logo_image.png";
 import { useNavigate } from "react-router-dom";
 
 const ContactUsPage = () => {
   const [isMobile, setIsMobile] = useState(false);
-  const [section, setSection] = useState(0);
   const [menuOpened, setMenuOpened] = useState(false);
-  const [isShowoverlay, setisShowoverlay] = useState(false);
+  const [isShowoverlay, setIsShowoverlay] = useState(false);
+  const [scrollPages, setScrollPages] = useState(1);
+  const contentRef = useRef(null);
   const navigate = useNavigate();
 
-  useEffect(() => {
-    const handleResize = () => {
-      setIsMobile(window.innerWidth <= 768); // You can adjust this breakpoint as needed
+  const handleResize = () => {
+    setIsMobile(window.innerWidth <= 768);
+    calculateScrollPages();
+  };
+
+  const calculateScrollPages = () => {
+    console.log(contentRef.current, "-----dsdsds");
+    if (contentRef.current) {
+      const contentHeight = contentRef.current.offsetHeight;
+      const windowHeight = window.innerHeight;
+      const pages = contentHeight / windowHeight;
+      setScrollPages(Math.max(pages, 1));
+    }
+  };
+
+  useLayoutEffect(() => {
+    if (contentRef.current) {
+      handleResize();
+    }
+
+    const handleResizeEvent = () => {
+      if (contentRef.current) {
+        handleResize();
+      }
     };
 
-    handleResize(); // Check on mount
-    window.addEventListener("resize", handleResize); // Listen for window resize events
+    console.log(contentRef.current, "----");
+    window.addEventListener("resize", handleResizeEvent);
 
     return () => {
-      window.removeEventListener("resize", handleResize); // Cleanup on unmount
+      window.removeEventListener("resize", handleResizeEvent);
     };
-  }, []);
+  }, [contentRef]);
 
-  const Navigate_Home = () => {
-    navigate("/");
-  };
+  
 
-  const Navigate_AboutUs = () => {
-    navigate("/AboutUs");
-  };
-
-  const Navigate_ContactUs = () => {
-    navigate("/ContactUs");
-  };
-
-  const Navigate_FrontendPage = () => {
-    navigate("/FrontendPage");
-  };
-
-  const Navigate_BackendPage = () => {
-    navigate("/BackendPage");
-  };
+  // Navigation functions
+  const Navigate_Home = () => navigate("/");
+  const Navigate_AboutUs = () => navigate("/AboutUs");
+  const Navigate_ContactUs = () => navigate("/ContactUs");
+  const Navigate_FrontendPage = () => navigate("/FrontendPage");
+  const Navigate_BackendPage = () => navigate("/BackendPage");
 
   return (
     <div className="Main_Layout_Container relative">
       {menuOpened ? (
-        <>
-          <div className={`menu_container ${menuOpened ? "open" : ""}`}>
-            <div className="w-full px-6 py-8 flex flex-col justify-evenly items-start">
-              <button onClick={Navigate_Home} className="menu_link">
-                HOME
-              </button>
-              <button onClick={Navigate_AboutUs} className="menu_link">
-                About Us
-              </button>
-              <button onClick={Navigate_ContactUs} className="menu_link">
-                Contact us
-              </button>
-              <button onClick={Navigate_FrontendPage} className="menu_link">
-                AI ASSISTANT FOR CUSTOMER SUPPORT
-              </button>
-              <button onClick={Navigate_BackendPage} className="menu_link">
-                AI Workforce for Backend Operations
-              </button>
-            </div>
+        <div className={`menu_container open`}>
+          <div className="w-full px-6 py-8 flex flex-col justify-evenly items-start">
+            <button onClick={Navigate_Home} className="menu_link">
+              HOME
+            </button>
+            <button onClick={Navigate_AboutUs} className="menu_link">
+              About Us
+            </button>
+            <button onClick={Navigate_ContactUs} className="menu_link">
+              Contact us
+            </button>
+            <button onClick={Navigate_FrontendPage} className="menu_link">
+              AI ASSISTANT FOR CUSTOMER SUPPORT
+            </button>
+            <button onClick={Navigate_BackendPage} className="menu_link">
+              AI Workforce for Backend Operations
+            </button>
           </div>
-        </>
+        </div>
       ) : (
         <Canvas
           camera={{
@@ -82,9 +90,9 @@ const ContactUsPage = () => {
           <ambientLight intensity={1} />
           <directionalLight position={[5, 5, 5]} />
           <OrbitControls enableZoom={false} />
-          <ScrollControls pages={isMobile ? 1.6 : 1} damping={1.25}>
+          <ScrollControls pages={scrollPages} damping={1.25} infinite={false}>
             <Scroll>
-              <ContactUsSection />
+              <ContactUsSection ref={contentRef} />
               <CombinedMeshes position={[0, 0, -18]} />
             </Scroll>
           </ScrollControls>
@@ -92,11 +100,10 @@ const ContactUsPage = () => {
       )}
 
       <Menu
-        onsectionChange={setSection}
         menuOpened={menuOpened}
         setMenuOpened={setMenuOpened}
         isShowoverlay={isShowoverlay}
-        setisShowoverlay={setisShowoverlay}
+        setIsShowoverlay={setIsShowoverlay}
       />
 
       <div className={`menu_overlay ${isShowoverlay ? "open" : ""}`}></div>

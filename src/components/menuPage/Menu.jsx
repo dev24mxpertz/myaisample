@@ -5,10 +5,10 @@ import crossimage from "../../assets/crossimage4.png";
 import { motion } from "framer-motion";
 
 const Menu = (props) => {
-  const { menuOpened, setMenuOpened, setisShowoverlay, isShowoverlay } = props;
+  const { menuOpened, setMenuOpened, setIsShowoverlay, isShowoverlay } = props;
 
   const menuchangehandler = () => {
-    setisShowoverlay(!isShowoverlay);
+    setIsShowoverlay(!isShowoverlay);
     setTimeout(() => {
       setMenuOpened(!menuOpened);
     }, 1000);

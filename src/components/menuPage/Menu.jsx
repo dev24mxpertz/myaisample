@@ -29,7 +29,7 @@ const Menu = (props) => {
         onClick={menuchangehandler}
         src={menuOpened ? crossimage : menusymbol}
         alt="menusymbol"
-        className="w-8 text-black-800 cursor-pointer bg-white"
+        className="p-2 w-12 text-black-800 cursor-pointer bg-white rounded-full"
         initial={{ opacity: 0, rotate: 180 }}
         animate={{ opacity: 1, rotate: menuOpened ? 180 : 0 }}
         transition={{ duration: 0.8 }}

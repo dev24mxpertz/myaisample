@@ -33,34 +33,23 @@ const BlackSection = (props) => {
   );
 };
 
-const PartnerSection = ({ number, heading, content }) => {
-  const [isHovered, setIsHovered] = useState(false);
-
-  const handleMouseEnter = () => setIsHovered(true);
-  const handleMouseLeave = () => setIsHovered(false);
-
+const PartnerSection = ({ number, heading, content, subheading }) => {
   return (
-    <div
-      className="partner_section"
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
-    >
+    <div className="partner_section">
       <span className="partner_arrow">
-        <i
-          className={`bi bi-arrow-up ${isHovered ? "rotated" : ""}`}
-          style={{ transition: "transform 0.3s ease" }}
-        ></i>
+        <i className="bi bi-arrow-up"></i>
       </span>
 
-      <h3>
-        {isHovered
-          ? "Your success is our priority, now and in the future."
-          : "Why Choose Us"}
-      </h3>
+      <div className="h-full firstpartner_div">
+        <h3 className="why_choosetext">Why Choose Us?</h3>
+        <h3 className="numbertext">0{number}.</h3>
+        <h3 className="headingtext">{heading}</h3>
+      </div>
 
-      <span style={{ opacity: isHovered ? 0 : 1 }}>{number}.</span>
-
-      <p>{isHovered ? content : heading}</p>
+      <div className="nextdiv">
+        <h4 className="nextdiv_h4">{subheading}</h4>
+        <p className="nextdiv_p">{content}</p>
+      </div>
     </div>
   );
 };
@@ -104,7 +93,6 @@ const IndexSection = forwardRef((props, ref) => {
         >
           Reinvent
         </motion.h1>
-
         <motion.h2
           className="frontsubheading animate-text"
           initial={{ opacity: 0, y: "120px" }}
@@ -121,8 +109,8 @@ const IndexSection = forwardRef((props, ref) => {
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.3, ease: "easeOut" }}
           >
-            Reinvent the value chain, solve unique problems, and boost
-            productivity, efficiency, and profitability with bespoke AI
+            Reinvent the value chain and solve unique problems to enhance
+            productivity, efficiency, and profitability with Bespoke GenAI
             solutions.
           </motion.p>
         </div>
@@ -167,7 +155,8 @@ const IndexSection = forwardRef((props, ref) => {
             viewport={{ once: false, amount: 0.3 }}
             transition={{ duration: 0.2, ease: "easeOut" }}
           >
-            in less than half the time against competitors
+            More than double the revenue in less than half the time compared to
+            competitors.
           </motion.p>
           <div className="  firstflexidv ">
             <motion.div
@@ -201,7 +190,7 @@ const IndexSection = forwardRef((props, ref) => {
               />
               <h3 className="secondsectionspannumber">2.6x</h3>
               <p className="secondsectionlastpara">
-                Higher average revenue growth.
+                higher average revenue growth
               </p>
             </motion.div>
           </div>
@@ -239,7 +228,7 @@ const IndexSection = forwardRef((props, ref) => {
                 viewport={{ once: false, amount: 0.3 }}
                 transition={{ duration: 0.2, ease: "easeOut" }}
               >
-                An agency saved 3 million operational hours using GenAI.
+                An agency saved 3 million operational hours by using GenAI.
               </motion.p>
             </motion.div>
 
@@ -264,7 +253,7 @@ const IndexSection = forwardRef((props, ref) => {
                 viewport={{ once: false, amount: 0.3 }}
                 transition={{ duration: 0.2, ease: "easeOut" }}
               >
-                A company delivered 16 million personalized offerings to their
+                A company delivered 16 million personalised offerings to its
                 customers within 3 months.
               </motion.p>
             </motion.div>
@@ -278,7 +267,7 @@ const IndexSection = forwardRef((props, ref) => {
             >
               <img src={fourthIcon3} alt="fourthIcon3" className="w-16" />
               <h3 className="fourthboxheading">+10%</h3>
-              <p className="fourthboxsubheading">Hours Saved</p>
+              <p className="fourthboxsubheading">Revenue</p>
               <span className="fourthbox_arrow">
                 <i className="bi bi-chevron-right"></i>
               </span>
@@ -290,8 +279,8 @@ const IndexSection = forwardRef((props, ref) => {
                 viewport={{ once: false, amount: 0.3 }}
                 transition={{ duration: 0.2, ease: "easeOut" }}
               >
-                An insurer increased the potential revenue by 10% using AI in
-                only one single function of the whole process.
+                An insurer increased potential revenue by 10% using AI in just
+                one function of the entire process.
               </motion.p>
             </motion.div>
           </div>
@@ -315,12 +304,12 @@ const IndexSection = forwardRef((props, ref) => {
               viewport={{ once: false, amount: 0.3 }}
               transition={{ duration: 0.2, ease: "easeOut" }}
             >
-              <h3>AI ASSISTANT FOR CUSTOMER SERVICE</h3>
+              <h3>AGENTIC AI ASSISTANT FOR CUSTOMER SERVICE</h3>
               <p>
                 Eliminate unique customer frustrations and operational issues to
                 deliver a seamless experience that keeps them coming back, all
                 while driving greater operational efficiency and productivity
-                with the custom AI assistant for customer service.
+                with the bespoke Agentic AI assistant for customer service.
               </p>
               <motion.button
                 className="oursite_box_link"
@@ -339,12 +328,13 @@ const IndexSection = forwardRef((props, ref) => {
               viewport={{ once: false, amount: 0.3 }}
               transition={{ duration: 0.2, ease: "easeOut" }}
             >
-              <h3>AI WORKFORCE FOR BUSINESS OPERATIONS</h3>
+              <h3>AI WORKFORCE FOR BACK-END OPERATIONS </h3>
               <p>
                 Imagine a workplace where challenges are met head-on,
                 departments thrive, and employees are empowered to focus on
-                creativity and innovation—all driven by custom AI solutions
-                applicable throughout the value chain.
+                creativity and innovation—all driven by bespoke AI solutions
+                applicable throughout the value chain, designed to solve your
+                unique business problems and inefficiencies.
               </p>
               <motion.button
                 className="oursite_box_link"
@@ -370,150 +360,81 @@ const IndexSection = forwardRef((props, ref) => {
             Achieve Your Goals <br /> with Altus Solutions
           </motion.h3>
           <div className="fourthflexidv">
-            <motion.div
-              className="w_85"
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: false, amount: 0.3 }}
-              transition={{ duration: 0.2, ease: "easeOut" }}
-            >
-              <div className="goalwrapper w-full goalwrapper_padding flex flex-col justify-between">
-                <h3>BOOST YOUR SUCCESS</h3>
-                <p>An agency saved 3 million operational hours using GenAI.</p>
-                <div className="goalouter_circle">
-                  <motion.div
-                    className="goalinner_circle"
-                    initial={{ opacity: 0, y: 30 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: false, amount: 0.3 }}
-                    transition={{ duration: 0.2, ease: "easeOut" }}
-                  >
-                    <img src={goalicon1} alt="goalicon1" />
-                    <span>
-                      An agency saved 3 million operational hours using GenAI.
-                    </span>
-                    <p>
-                      Our intelligent solutions target unique challenges,
-                      enhance customer experiences, and fuel innovation, setting
-                      you apart in a competitive landscape.
-                    </p>
-                  </motion.div>
+            <div class="goalwrapper goalwrapper_padding">
+              <h3>BOOST YOUR SUCCESS</h3>
+              <p>
+                Our goal is to help you overcome obstacles and unlock your full
+                potential. 
+              </p>
+              <span>
+                Our intelligent solutions address unique challenges, enhance
+                customer experiences, and drive innovation, setting you apart in
+                a competitive landscape.
+              </span>
+              <div class="goalouter_circle">
+                <div class="goalinner_circle">
+                  <img src={goalicon1} alt="goal icon" />
                 </div>
               </div>
-            </motion.div>
+            </div>
 
-            <motion.div
-              className="flex"
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: false, amount: 0.3 }}
-              transition={{ duration: 0.2, ease: "easeOut" }}
-            >
-              <div className="goalwrapper flex flex-col justify-center">
-                <h3>ADAPTIVE SCALABILITY</h3>
-                <p>AI Tools that grow with you.</p>
-                <div className="goalouter_circle">
-                  <motion.div
-                    className="goalinner_circle"
-                    initial={{ opacity: 0, y: 30 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: false, amount: 0.3 }}
-                    transition={{ duration: 0.2, ease: "easeOut" }}
-                  >
-                    <img src={goalicon2} alt="goalicon2" />
-                    <span>An agency saved 3 million</span>
-                    <p>
-                      Our intelligent solutions target unique challenges,
-                      enhance customer experiences.
-                    </p>
-                  </motion.div>
+            <div class="goalwrapper goalwrapper_padding">
+              <h3>ADAPTIVE SCALABILITY</h3>
+              <p>AI Tools that grow alongside you.</p>
+              <span>
+                We proactively ensure that your solutions meet new demands, so
+                that as you grow, your processes and systems remain
+                optimised—enabling confident and sustainable scaling.
+              </span>
+              <div class="goalouter_circle">
+                <div class="goalinner_circle">
+                  <img src={goalicon2} alt="goal icon" />
                 </div>
               </div>
-            </motion.div>
+            </div>
           </div>
           <div className="fouthsubflexdiv">
-            <motion.div
-              className="goalwrapper flex flex-col justify-center"
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: false, amount: 0.3 }}
-              transition={{ duration: 0.2, ease: "easeOut" }}
-            >
-              <h3>
-                EMPOWERED <br /> HUMAN CAPITAL
-              </h3>
-              <p>An agency saved 3 million operational hours using GenAI.</p>
-              <div className="goalouter_circle">
-                <motion.div
-                  className="goalinner_circle"
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: false, amount: 0.3 }}
-                  transition={{ duration: 0.2, ease: "easeOut" }}
-                >
-                  <img src={goalicon3} alt="goalicon3" />
-                  <span>An agency saved 3 million</span>
-                  <p>
-                    Our intelligent solutions target unique challenges, enhance
-                    customer experiences.
-                  </p>
-                </motion.div>
+            <div class="goalwrapper goalwrapper_padding">
+              <h3>MAX RESULTS, LOW OVERHEAD </h3>
+              <p>Achieve more without heavy costs! </p>
+              <span>
+                By optimising processes, we help you achieve peak performance
+                while keeping operational costs in check.
+              </span>
+              <div class="goalouter_circle">
+                <div class="goalinner_circle">
+                  <img src={goalicon2} alt="goal icon" />
+                </div>
               </div>
-            </motion.div>
-            <motion.div
-              className="goalwrapper flex flex-col justify-center"
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: false, amount: 0.3 }}
-              transition={{ duration: 0.2, ease: "easeOut" }}
-            >
-              <h3>
-                MAX RESULTS, <br /> LOW OVERHEAD
-              </h3>
-              <p>Achieve more without heavy costs</p>
-              <div className="goalouter_circle">
-                <motion.div
-                  className="goalinner_circle"
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: false, amount: 0.3 }}
-                  transition={{ duration: 0.2, ease: "easeOut" }}
-                >
-                  <img src={goalicon4} alt="goalicon4" />
-                  <span>An agency saved 3 million</span>
-                  <p>
-                    Our intelligent solutions target unique challenges, enhance
-                    customer experiences.
-                  </p>
-                </motion.div>
+            </div>{" "}
+            <div class="goalwrapper goalwrapper_padding">
+              <h3>EMPOWERED HUMAN CAPITAL </h3>
+              <p> Empower your team to perform at their best.</p>
+              <span>
+                Alleviate frustrations, mitigate risks, and manage routine
+                tasks, allowing your employees to focus on creativity,
+                innovation, and high-value work—leading to a more engaged,
+                productive, and motivated workforce.
+              </span>
+              <div class="goalouter_circle">
+                <div class="goalinner_circle">
+                  <img src={goalicon2} alt="goal icon" />
+                </div>
               </div>
-            </motion.div>
-            <motion.div
-              className="goalwrapper flex flex-col justify-center"
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: false, amount: 0.3 }}
-              transition={{ duration: 0.2, ease: "easeOut" }}
-            >
-              <h3>BE A DIFFERENTITOR</h3>
+            </div>{" "}
+            <div class="goalwrapper goalwrapper_padding">
+              <h3> BE A DIFFERENT<br />IATOR </h3>
               <p>Stand out from the crowd.</p>
-              <div className="goalouter_circle">
-                <motion.div
-                  className="goalinner_circle"
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: false, amount: 0.3 }}
-                  transition={{ duration: 0.2, ease: "easeOut" }}
-                >
-                  <img src={goalicon5} alt="goalicon5" />
-                  <span>An agency saved 3 million</span>
-                  <p>
-                    Our intelligent solutions target unique challenges, enhance
-                    customer experiences.
-                  </p>
-                </motion.div>
+              <span>
+                Our bespoke solutions enable you to offer distinctive
+                capabilities that set you apart from competitors.
+              </span>
+              <div class="goalouter_circle">
+                <div class="goalinner_circle">
+                  <img src={goalicon2} alt="goal icon" />
+                </div>
               </div>
-            </motion.div>
+            </div>
           </div>
         </div>
         {/* ================================== */}
@@ -525,28 +446,33 @@ const IndexSection = forwardRef((props, ref) => {
             viewport={{ once: false, amount: 0.3 }}
             transition={{ duration: 0.2, ease: "easeOut" }}
           >
-            Partner with Us to <br /> Realize Your Vision
+            Partner with us to
+            <br /> achieve your vision and mission
           </motion.h3>
           <div className="fifthflexidv">
             <PartnerSection
               number={1}
-              heading="Expertise"
-              content="We provide regular updates, ongoing support, and continuous optimisation to ensure your unique challenges are always addressed, and our AI solutions continue delivering value as your business grows."
+              subheading="We solve your unique problems."
+              heading="BESPOKE SOLUTIONS "
+              content="We work closely with you to design and deliver bespoke solutions, ensuring that our AI tools are fine-tuned to address your unique business challenges and requirements."
             />
             <PartnerSection
               number={2}
-              heading="Seamless Integration"
-              content="We provide regular updates, ongoing support, and continuous optimisation to ensure your unique challenges are always addressed, and our AI solutions continue delivering value as your business grows."
+              subheading="PARTNERSHIP FOR LASTING IMPACT "
+              heading="PARTNERSHIP FOR LASTING IMPACT "
+              content="We work closely with you to design and deliver bespoke solutions, ensuring that our AI tools are fine-tuned to address your unique business challenges and requirements."
             />
             <PartnerSection
               number={3}
-              heading="PARTNERSHIP FOR LASTING IMPACT"
-              content="We provide regular updates, ongoing support, and continuous optimisation to ensure your unique challenges are always addressed, and our AI solutions continue delivering value as your business grows."
+              subheading="Resolve business challenges seamlessly and effortlessly."
+              heading="SEAMLESS INTEGRATION"
+              content="Our solutions are designed to work seamlessly with your existing systems, minimising disruption and ensuring a swift and efficient transition."
             />
             <PartnerSection
               number={4}
-              heading="Bespoke Solutions"
-              content="We provide regular updates, ongoing support, and continuous optimisation to ensure your unique challenges are always addressed, and our AI solutions continue delivering value as your business grows."
+              subheading="Years of experience, young creative minds, and a passion for problem-solving and innovation."
+              heading="EXPERTISE"
+              content="With deep industry knowledge, a flair for creativity, experience, and a commitment to innovation, we don’t just offer technology—we partner with you and provide consultancy to unlock your business’s full potential by clearly identifying challenges, discerning opportunities for improvement, and understanding your unique requirements to develop superior solutions."
             />
           </div>
         </div>
@@ -688,8 +614,11 @@ const IndexSection = forwardRef((props, ref) => {
               viewport={{ once: false, amount: 0.3 }}
               transition={{ duration: 0.2, ease: "easeOut" }}
             >
-              3517 W. Gray St. Utica, Pennsylvania 57867
+              Newcastle Upon Tyne
               <br />
+              Indore
+              <br />
+              Surat (Coming Soon !)
             </motion.p>
             <motion.span
               className="text-2xl font-poppins font-bold firstfooterspan"

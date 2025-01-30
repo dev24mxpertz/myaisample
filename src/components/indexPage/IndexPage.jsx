@@ -12,7 +12,7 @@ const IndexPage = () => {
   const [section, setSection] = useState(0);
   const [menuOpened, setMenuOpened] = useState(false);
   const [isShowoverlay, setIsShowoverlay] = useState(false);
-  const [scrollPages, setScrollPages] = useState(8);
+  const [scrollPages, setScrollPages] = useState(8.6);
   const navigate = useNavigate();
 
   const indexSectionRef = useRef(null);

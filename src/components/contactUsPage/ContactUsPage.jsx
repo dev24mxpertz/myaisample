@@ -11,44 +11,23 @@ const ContactUsPage = () => {
   const [menuOpened, setMenuOpened] = useState(false);
   const [isShowoverlay, setIsShowoverlay] = useState(false);
   const [scrollPages, setScrollPages] = useState(1);
-  const contentRef = useRef(null);
-  const navigate = useNavigate();
 
+  const navigate = useNavigate();
   const handleResize = () => {
     setIsMobile(window.innerWidth <= 768);
-    calculateScrollPages();
   };
 
-  const calculateScrollPages = () => {
-    console.log(contentRef.current, "-----dsdsds");
-    if (contentRef.current) {
-      const contentHeight = contentRef.current.offsetHeight;
-      const windowHeight = window.innerHeight;
-      const pages = contentHeight / windowHeight;
-      setScrollPages(Math.max(pages, 1));
-    }
-  };
-
-  useLayoutEffect(() => {
-    if (contentRef.current) {
-      handleResize();
-    }
-
-    const handleResizeEvent = () => {
-      if (contentRef.current) {
-        handleResize();
-      }
-    };
-
-    console.log(contentRef.current, "----");
-    window.addEventListener("resize", handleResizeEvent);
-
+  useEffect(() => {
+    window.addEventListener("resize", handleResize);
     return () => {
-      window.removeEventListener("resize", handleResizeEvent);
+      window.removeEventListener("resize", handleResize);
     };
-  }, [contentRef]);
+  }, []);
 
-  
+  const updateScrollPages = (pages) => {
+       console.log(pages, "at the contact Page ");
+    setScrollPages(pages);
+  };
 
   // Navigation functions
   const Navigate_Home = () => navigate("/");
@@ -92,7 +71,8 @@ const ContactUsPage = () => {
           <OrbitControls enableZoom={false} />
           <ScrollControls pages={scrollPages} damping={1.25} infinite={false}>
             <Scroll>
-              <ContactUsSection ref={contentRef} />
+
+              <ContactUsSection onScrollPagesChange={updateScrollPages} />
               <CombinedMeshes position={[0, 0, -18]} />
             </Scroll>
           </ScrollControls>

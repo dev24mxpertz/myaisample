@@ -1,5 +1,11 @@
 import { Scroll } from "@react-three/drei";
-import React, { forwardRef, useEffect, useRef, useState } from "react";
+import React, {
+  forwardRef,
+  useEffect,
+  useImperativeHandle,
+  useRef,
+  useState,
+} from "react";
 import logoimage from "../../assets/Logo_image.png";
 import secondsectionimage1 from "../../assets/secondsectionimage1.png";
 import secondsectionimage2 from "../../assets/secondsectionimage2.png";
@@ -54,32 +60,33 @@ const PartnerSection = ({ number, heading, content, subheading }) => {
   );
 };
 
-const IndexSection = forwardRef((props, ref) => {
+const IndexSection = forwardRef(({ onScrollPagesChange }, ref) => {
   const localRef = useRef(null);
 
+  useImperativeHandle(ref, () => localRef.current);
+
   useEffect(() => {
-    const handleResize = () => {
+    const calculateScrollPages = () => {
       if (localRef.current) {
-        console.log(
-          localRef.current,
-          "Window resized. Current scroll container height:",
-          localRef.current.clientHeight
-        );
+        const indexSectionHeight = localRef.current.clientHeight || 0;
+        const windowHeight = window.innerHeight || 1;
+        const pages = indexSectionHeight / windowHeight;
+        onScrollPagesChange(Math.max(pages, 3));
       }
     };
 
-    if (ref) {
-      ref.current = localRef.current;
-    }
+    const handleResize = () => {
+      calculateScrollPages();
+    };
 
     window.addEventListener("resize", handleResize);
 
-    handleResize();
+    setTimeout(calculateScrollPages, 0);
 
     return () => {
       window.removeEventListener("resize", handleResize);
     };
-  }, [ref, localRef]);
+  }, [onScrollPagesChange]);
 
   return (
     <Scroll html className="w-full" ref={localRef}>
@@ -423,7 +430,12 @@ const IndexSection = forwardRef((props, ref) => {
               </div>
             </div>{" "}
             <div class="goalwrapper goalwrapper_padding">
-              <h3> BE A DIFFERENT<br />IATOR </h3>
+              <h3>
+                {" "}
+                BE A DIFFERENT
+                <br />
+                IATOR{" "}
+              </h3>
               <p>Stand out from the crowd.</p>
               <span>
                 Our bespoke solutions enable you to offer distinctive

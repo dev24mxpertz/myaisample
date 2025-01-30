@@ -1,5 +1,5 @@
 import { Scroll } from "@react-three/drei";
-import React, { forwardRef, useEffect, useRef, useState } from "react";
+import React, { forwardRef, useEffect, useImperativeHandle, useRef, useState } from "react";
 import logoimage from "../../assets/Logo_image.png";
 import menusymbol from "../../assets/menusymbol.png";
 import { useNavigate } from "react-router-dom";
@@ -70,34 +70,33 @@ const PartnerSection = ({ heading, content }) => {
   );
 };
 
-const AboutSection = forwardRef((props, ref) => {
+const AboutSection = forwardRef(({ onScrollPagesChange }, ref) => {
   const localRef = useRef(null);
 
+  useImperativeHandle(ref, () => localRef.current);
+
   useEffect(() => {
-    const handleResize = () => {
+    const calculateScrollPages = () => {
       if (localRef.current) {
-        console.log(
-          localRef.current,
-          "Window resized. Current scroll container height:",
-          localRef.current.clientHeight
-        );
+        const indexSectionHeight = localRef.current.clientHeight || 0;
+        const windowHeight = window.innerHeight || 1;
+        const pages = indexSectionHeight / windowHeight;
+        onScrollPagesChange(Math.max(pages, 3));
       }
     };
 
-    // Sync ref from parent
-    if (ref) {
-      ref.current = localRef.current;
-    }
+    const handleResize = () => {
+      calculateScrollPages();
+    };
 
     window.addEventListener("resize", handleResize);
 
-    // Call handleResize once on mount
-    handleResize();
+    setTimeout(calculateScrollPages, 0);
 
     return () => {
       window.removeEventListener("resize", handleResize);
     };
-  }, [ref]);
+  }, [onScrollPagesChange]);
 
   return (
     <Scroll html className="w-full" ref={localRef}>

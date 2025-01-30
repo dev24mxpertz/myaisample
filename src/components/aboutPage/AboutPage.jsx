@@ -15,41 +15,22 @@ const AboutPage = () => {
   const [scrollPages, setScrollPages] = useState(7.2);
   const navigate = useNavigate();
 
- const aboutSectionRef = useRef(null);
 
- const handleResize = () => {
-   setIsMobile(window.innerWidth <= 768);
-   calculateScrollPages();
- };
-
- const calculateScrollPages = () => {
-   if (aboutSectionRef.current) {
-     const aboutSectionHeight = aboutSectionRef.current.offsetHeight;
-     const windowHeight = window.innerHeight;
-     const pages = aboutSectionHeight / windowHeight;
-     const newScrollPages = Math.max(pages, 3);
-     setScrollPages(newScrollPages);
-   }
- };
-
- useLayoutEffect(() => {
-   if (aboutSectionRef.current) {
-     handleResize(); 
-   }
-
-   const handleResizeEvent = () => {
-     if (aboutSectionRef.current) {
-       handleResize();
-     }
+   const handleResize = () => {
+     setIsMobile(window.innerWidth <= 768);
    };
-
-   window.addEventListener("resize", handleResizeEvent);
-
-   return () => {
-     window.removeEventListener("resize", handleResizeEvent);
+ 
+   useEffect(() => {
+     window.addEventListener("resize", handleResize);
+     return () => {
+       window.removeEventListener("resize", handleResize);
+     };
+   }, []);
+ 
+   const updateScrollPages = (pages) => {
+    console.log(pages  ,  "at the About Page ")
+     setScrollPages(pages);
    };
- }, []);
-
 
   const Navigate_Home = () => navigate("/");
   const Navigate_AboutUs = () => navigate("/AboutUs");
@@ -92,8 +73,9 @@ const AboutPage = () => {
           <OrbitControls enableZoom={false} />
           <ScrollControls pages={scrollPages} damping={1.25} infinite={false}>
             <Scroll>
-              {/* Pass aboutSectionRef to the AboutSection */}
-              <AboutSection ref={aboutSectionRef} />
+
+              <AboutSection onScrollPagesChange={updateScrollPages} />
+           
               <CombinedMeshes position={[0, 0, -3]} />
             </Scroll>
           </ScrollControls>

@@ -18,168 +18,165 @@ const Section = (props) => {
   );
 };
 
-const ContactUsSection = forwardRef((props, ref) => {
+const ContactUsSection = forwardRef(({ onScrollPagesChange }, ref) => {
   const localRef = useRef(null);
 
+  useImperativeHandle(ref, () => localRef.current);
 
   useEffect(() => {
-    const handleResize = () => {
-      console.log("handleresize is triggering ", localRef.current, ref);
+    const calculateScrollPages = () => {
       if (localRef.current) {
-        console.log(
-          localRef.current,
-          "Window resized. Current scroll container height:",
-          localRef.current.clientHeight
-        );
+        const indexSectionHeight = localRef.current.clientHeight || 0;
+        const windowHeight = window.innerHeight || 1;
+        const pages = indexSectionHeight / windowHeight;
+        onScrollPagesChange(Math.max(pages, 3));
       }
     };
 
-    console.log(localRef.current, "localref ", ref);
-    if (localRef.current) {
-      ref.current = localRef.current;
-    }
+    const handleResize = () => {
+      calculateScrollPages();
+    };
 
     window.addEventListener("resize", handleResize);
 
-    handleResize();
+    setTimeout(calculateScrollPages, 0);
 
     return () => {
       window.removeEventListener("resize", handleResize);
     };
-  }, [ref]);
-
+  }, [onScrollPagesChange]);
 
   return (
     <Scroll ref={localRef} html className="w-full">
       {/* <div ref={localRef}> */}
-        <Section>
-          <div className="footer_maindiv contactresponsivediv">
-            <motion.div
-              className="flex flex-col justify-start max-h-max footersection"
+      <Section>
+        <div className="footer_maindiv contactresponsivediv">
+          <motion.div
+            className="flex flex-col justify-start max-h-max footersection"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: false, amount: 0.3 }}
+            transition={{ duration: 0.2, ease: "easeOut" }}
+          >
+            <motion.img
+              src={logoimage}
+              alt="logo_image"
+              className="footer_logo_image"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: false, amount: 0.3 }}
+              transition={{ duration: 0.2, ease: "easeOut" }}
+            />
+            <motion.p
+              className="my-16 animate-text"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: false, amount: 0.3 }}
               transition={{ duration: 0.2, ease: "easeOut" }}
             >
-              <motion.img
-                src={logoimage}
-                alt="logo_image"
-                className="footer_logo_image"
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: false, amount: 0.3 }}
-                transition={{ duration: 0.2, ease: "easeOut" }}
-              />
-              <motion.p
-                className="my-16 animate-text"
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: false, amount: 0.3 }}
-                transition={{ duration: 0.2, ease: "easeOut" }}
-              >
-                3517 W. Gray St. Utica, Pennsylvania 57867
-                <br />
-              </motion.p>
-              <motion.span
-                className="text-2xl font-poppins font-bold firstfooterspan"
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: false, amount: 0.3 }}
-                transition={{ duration: 0.2, ease: "easeOut" }}
-              >
-                <i className="bi bi-c-circle"></i> 2025 Altus
-              </motion.span>
-            </motion.div>
+              3517 W. Gray St. Utica, Pennsylvania 57867
+              <br />
+            </motion.p>
+            <motion.span
+              className="text-2xl font-poppins font-bold firstfooterspan"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: false, amount: 0.3 }}
+              transition={{ duration: 0.2, ease: "easeOut" }}
+            >
+              <i className="bi bi-c-circle"></i> 2025 Altus
+            </motion.span>
+          </motion.div>
 
-            <motion.div
-              className="flex flex-col max-h-max footersection"
+          <motion.div
+            className="flex flex-col max-h-max footersection"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: false, amount: 0.3 }}
+            transition={{ duration: 0.2, ease: "easeOut" }}
+          >
+            <motion.p
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: false, amount: 0.3 }}
               transition={{ duration: 0.2, ease: "easeOut" }}
             >
-              <motion.p
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: false, amount: 0.3 }}
-                transition={{ duration: 0.2, ease: "easeOut" }}
-              >
-                Twitter/X
-              </motion.p>
-              <motion.p
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: false, amount: 0.3 }}
-                transition={{ duration: 0.2, ease: "easeOut" }}
-              >
-                Instagram
-              </motion.p>
-              <motion.p
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: false, amount: 0.3 }}
-                transition={{ duration: 0.2, ease: "easeOut" }}
-              >
-                Linkedin
-              </motion.p>
-              <motion.span
-                className="my-6 animate-text"
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: false, amount: 0.3 }}
-                transition={{ duration: 0.2, ease: "easeOut" }}
-              >
-                Reinvent your business
-              </motion.span>
-              <motion.p
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: false, amount: 0.3 }}
-                transition={{ duration: 0.2, ease: "easeOut" }}
-              >
-                support@example.com
-              </motion.p>
-            </motion.div>
+              Twitter/X
+            </motion.p>
+            <motion.p
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: false, amount: 0.3 }}
+              transition={{ duration: 0.2, ease: "easeOut" }}
+            >
+              Instagram
+            </motion.p>
+            <motion.p
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: false, amount: 0.3 }}
+              transition={{ duration: 0.2, ease: "easeOut" }}
+            >
+              Linkedin
+            </motion.p>
+            <motion.span
+              className="my-6 animate-text"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: false, amount: 0.3 }}
+              transition={{ duration: 0.2, ease: "easeOut" }}
+            >
+              Reinvent your business
+            </motion.span>
+            <motion.p
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: false, amount: 0.3 }}
+              transition={{ duration: 0.2, ease: "easeOut" }}
+            >
+              support@example.com
+            </motion.p>
+          </motion.div>
 
-            <motion.div
-              className="flex flex-col max-h-max footersection2"
+          <motion.div
+            className="flex flex-col max-h-max footersection2"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: false, amount: 0.3 }}
+            transition={{ duration: 0.2, ease: "easeOut" }}
+          >
+            <motion.h3
+              className="my-4 animate-text"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: false, amount: 0.3 }}
               transition={{ duration: 0.2, ease: "easeOut" }}
             >
-              <motion.h3
-                className="my-4 animate-text"
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: false, amount: 0.3 }}
-                transition={{ duration: 0.2, ease: "easeOut" }}
-              >
-                Get in Touch with us
-              </motion.h3>
-              <div className="mx-auto w-full">
-                <div className="footer_input_container">
-                  <motion.input
-                    className="footer_input"
-                    placeholder="Your Email"
-                    initial={{ opacity: 0, y: 30 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: false, amount: 0.3 }}
-                    transition={{ duration: 0.2, ease: "easeOut" }}
-                  />
-                  <motion.span
-                    initial={{ opacity: 0, y: 30 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: false, amount: 0.3 }}
-                    transition={{ duration: 0.2, ease: "easeOut" }}
-                  >
-                    <i className="bi bi-arrow-right"></i>
-                  </motion.span>
-                </div>
+              Get in Touch with us
+            </motion.h3>
+            <div className="mx-auto w-full">
+              <div className="footer_input_container">
+                <motion.input
+                  className="footer_input"
+                  placeholder="Your Email"
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: false, amount: 0.3 }}
+                  transition={{ duration: 0.2, ease: "easeOut" }}
+                />
+                <motion.span
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: false, amount: 0.3 }}
+                  transition={{ duration: 0.2, ease: "easeOut" }}
+                >
+                  <i className="bi bi-arrow-right"></i>
+                </motion.span>
               </div>
-            </motion.div>
-          </div>
-        </Section>
+            </div>
+          </motion.div>
+        </div>
+      </Section>
       {/* </div> */}
     </Scroll>
   );

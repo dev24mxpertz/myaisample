@@ -3,6 +3,7 @@ import React, {
   forwardRef,
   useEffect,
   useImperativeHandle,
+  useLayoutEffect,
   useRef,
   useState,
 } from "react";
@@ -61,22 +62,22 @@ const PartnerSection = ({ number, heading, content, subheading }) => {
 };
 
 const IndexSection = forwardRef(({ onScrollPagesChange }, ref) => {
-  const localRef = useRef(null);
+  const localRef = useRef(null)
+  useLayoutEffect(() => {
+    let debounceTimeout;
 
-  useImperativeHandle(ref, () => localRef.current);
-
-  useEffect(() => {
     const calculateScrollPages = () => {
       if (localRef.current) {
-        const indexSectionHeight = localRef.current.clientHeight || 0;
-        const windowHeight = window.innerHeight || 1;
+        const indexSectionHeight = localRef.current.clientHeight;
+        const windowHeight = window.innerHeight;
         const pages = indexSectionHeight / windowHeight;
         onScrollPagesChange(Math.max(pages, 3));
       }
     };
 
     const handleResize = () => {
-      calculateScrollPages();
+      clearTimeout(debounceTimeout);
+      debounceTimeout = setTimeout(calculateScrollPages, 10);
     };
 
     window.addEventListener("resize", handleResize);
@@ -84,654 +85,658 @@ const IndexSection = forwardRef(({ onScrollPagesChange }, ref) => {
     setTimeout(calculateScrollPages, 0);
 
     return () => {
+      clearTimeout(debounceTimeout);
       window.removeEventListener("resize", handleResize);
     };
-  }, [onScrollPagesChange]);
+  }, [onScrollPagesChange, localRef]);
 
   return (
-    <Scroll html className="w-full" ref={localRef}>
-      <Section>
-        <motion.h1
-          className="frontheading animate-text"
-          initial={{ opacity: 0, y: "120px" }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.3 }}
-          transition={{ duration: 0.2, ease: "easeOut" }}
-        >
-          Reinvent
-        </motion.h1>
-        <motion.h2
-          className="frontsubheading animate-text"
-          initial={{ opacity: 0, y: "120px" }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.3 }}
-          transition={{ duration: 0.2, ease: "easeOut" }}
-        >
-          Value Chain
-        </motion.h2>
-        <div className="w-full mt-10 flex items-end justify-end">
-          <motion.p
-            className="frontsubpara"
-            initial={{ opacity: 0, x: "120px" }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.3, ease: "easeOut" }}
-          >
-            Reinvent the value chain and solve unique problems to enhance
-            productivity, efficiency, and profitability with Bespoke GenAI
-            solutions.
-          </motion.p>
-        </div>
-        {/* ================================== */}
-        <div className="flex flex-col mt-10 items-center">
-          <div className="w-full secondboxbg rounded-md flex flex-col justify-center items-center p-4">
-            <motion.h3
-              className="secondsectionheading animate-text"
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: false, amount: 0.3 }}
-              transition={{ duration: 0.2, ease: "easeOut" }}
-            >
-              REINVENTION
-            </motion.h3>
-
-            <motion.h4
-              className="secondsectionsubheading animate-text"
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: false, amount: 0.3 }}
-              transition={{ duration: 0.2, ease: "easeOut" }}
-            >
-              STRATEGY FOR SUCCESS
-            </motion.h4>
-            <motion.p
-              className="secondsectionsubpara animate-text"
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: false, amount: 0.3 }}
-              transition={{ duration: 0.2, ease: "easeOut" }}
-            >
-              The rate of change affecting businesses has risen over 183% in the
-              last 4 years. To counter this, 83% of organisations have
-              accelerated the execution of reinvention with GenAI.
-            </motion.p>
-          </div>
-          <motion.p
-            className="secondsectionpara animate-text"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: false, amount: 0.3 }}
-            transition={{ duration: 0.2, ease: "easeOut" }}
-          >
-            More than double the revenue in less than half the time compared to
-            competitors.
-          </motion.p>
-          <div className="  firstflexidv ">
-            <motion.div
-              className="px-4 py-4 flex flex-col mx-2 items-center justify-evenly subboxshadow rounded-md w-1/4"
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: false, amount: 0.3 }}
-              transition={{ duration: 0.2, ease: "easeOut" }}
-            >
-              <img
-                src={secondsectionimage1}
-                alt="secondsectionimage1"
-                className="w-12"
-              />
-              <h3 className="secondsectionspannumber">2.5x</h3>
-              <p className="secondsectionlastpara">
-                Greater improvements in productivity
-              </p>
-            </motion.div>
-            <motion.div
-              className="px-4 py-4 flex flex-col mx-2 items-center justify-evenly subboxshadow bg-white rounded-md w-1/4"
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: false, amount: 0.3 }}
-              transition={{ duration: 0.2, ease: "easeOut" }}
-            >
-              <img
-                src={secondsectionimage2}
-                alt="secondsectionimage2"
-                className="w-12"
-              />
-              <h3 className="secondsectionspannumber">2.6x</h3>
-              <p className="secondsectionlastpara">
-                higher average revenue growth
-              </p>
-            </motion.div>
-          </div>
-        </div>
-        {/* ================================== */}
-        <div className="w-full py-16">
+    <Scroll html className="w-full">
+      <div ref={localRef}>
+        <Section>
           <motion.h1
-            className="thirdSectionheading animate-text"
-            initial={{ opacity: 0, y: 30 }}
+            className="frontheading animate-text"
+            initial={{ opacity: 0, y: "120px" }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: false, amount: 0.3 }}
-            transition={{ duration: 0.2, ease: "easeOut" }}
-          >
-            GEN AI IN ACTION
-          </motion.h1>
-          <div className="secondflexidv">
-            <motion.div
-              className="w-1/3 px-4 py-4 bg-orange-700 fourthbox relative"
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: false, amount: 0.3 }}
-              transition={{ duration: 0.2, ease: "easeOut" }}
-            >
-              <img src={fourthIcon1} alt="fourthIcon1" />
-              <h3 className="fourthboxheading">3M</h3>
-              <p className="fourthboxsubheading">Hours Saved</p>
-              <span className="fourthbox_arrow">
-                <i className="bi bi-chevron-right"></i>
-              </span>
-              <div className="fourth_subcircle"></div>
-              <motion.p
-                className="new-paragraph"
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: false, amount: 0.3 }}
-                transition={{ duration: 0.2, ease: "easeOut" }}
-              >
-                An agency saved 3 million operational hours by using GenAI.
-              </motion.p>
-            </motion.div>
-
-            <motion.div
-              className="w-1/3 px-4 py-4 bg-orange-700 fourthbox"
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: false, amount: 0.3 }}
-              transition={{ duration: 0.2, ease: "easeOut" }}
-            >
-              <img src={fourthIcon2} alt="fourthIcon2" className="w-16" />
-              <h3 className="fourthboxheading">16M</h3>
-              <p className="fourthboxsubheading">CUSTOMER OFFERINGS</p>
-              <span className="fourthbox_arrow">
-                <i className="bi bi-chevron-right"></i>
-              </span>
-              <div className="fourth_subcircle"></div>
-              <motion.p
-                className="new-paragraph"
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: false, amount: 0.3 }}
-                transition={{ duration: 0.2, ease: "easeOut" }}
-              >
-                A company delivered 16 million personalised offerings to its
-                customers within 3 months.
-              </motion.p>
-            </motion.div>
-
-            <motion.div
-              className="w-1/3 px-4 py-4 bg-orange-700 fourthbox"
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: false, amount: 0.3 }}
-              transition={{ duration: 0.2, ease: "easeOut" }}
-            >
-              <img src={fourthIcon3} alt="fourthIcon3" className="w-16" />
-              <h3 className="fourthboxheading">+10%</h3>
-              <p className="fourthboxsubheading">Revenue</p>
-              <span className="fourthbox_arrow">
-                <i className="bi bi-chevron-right"></i>
-              </span>
-              <div className="fourth_subcircle"></div>
-              <motion.p
-                className="new-paragraph"
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: false, amount: 0.3 }}
-                transition={{ duration: 0.2, ease: "easeOut" }}
-              >
-                An insurer increased potential revenue by 10% using AI in just
-                one function of the entire process.
-              </motion.p>
-            </motion.div>
-          </div>
-        </div>
-        {/* ================================== */}
-        <div className="w-full py-8 ">
-          <motion.h1
-            className="fouthSectionheading animate-text"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: false, amount: 0.3 }}
-            transition={{ duration: 0.2, ease: "easeOut" }}
-          >
-            Our suite of Solutions
-          </motion.h1>
-          <div className=" thirdflexidv">
-            <motion.div
-              className="oursite_box"
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: false, amount: 0.3 }}
-              transition={{ duration: 0.2, ease: "easeOut" }}
-            >
-              <h3>AGENTIC AI ASSISTANT FOR CUSTOMER SERVICE</h3>
-              <p>
-                Eliminate unique customer frustrations and operational issues to
-                deliver a seamless experience that keeps them coming back, all
-                while driving greater operational efficiency and productivity
-                with the bespoke Agentic AI assistant for customer service.
-              </p>
-              <motion.button
-                className="oursite_box_link"
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: false, amount: 0.3 }}
-                transition={{ duration: 0.2, ease: "easeOut" }}
-              >
-                Learn More
-              </motion.button>
-            </motion.div>
-            <motion.div
-              className="oursite_box"
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: false, amount: 0.3 }}
-              transition={{ duration: 0.2, ease: "easeOut" }}
-            >
-              <h3>AI WORKFORCE FOR BACK-END OPERATIONS </h3>
-              <p>
-                Imagine a workplace where challenges are met head-on,
-                departments thrive, and employees are empowered to focus on
-                creativity and innovation—all driven by bespoke AI solutions
-                applicable throughout the value chain, designed to solve your
-                unique business problems and inefficiencies.
-              </p>
-              <motion.button
-                className="oursite_box_link"
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: false, amount: 0.3 }}
-                transition={{ duration: 0.2, ease: "easeOut" }}
-              >
-                Learn More
-              </motion.button>
-            </motion.div>
-          </div>
-        </div>
-        {/* ================================== */}
-        <div className="w-full p-2 h-full ">
-          <motion.h3
-            className="goalachieve_heading animate-text my-10"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: false, amount: 0.3 }}
-            transition={{ duration: 0.2, ease: "easeOut" }}
-          >
-            Achieve Your Goals <br /> with Altus Solutions
-          </motion.h3>
-          <div className="fourthflexidv">
-            <div class="goalwrapper goalwrapper_padding">
-              <h3>BOOST YOUR SUCCESS</h3>
-              <p>
-                Our goal is to help you overcome obstacles and unlock your full
-                potential. 
-              </p>
-              <span>
-                Our intelligent solutions address unique challenges, enhance
-                customer experiences, and drive innovation, setting you apart in
-                a competitive landscape.
-              </span>
-              <div class="goalouter_circle">
-                <div class="goalinner_circle">
-                  <img src={goalicon1} alt="goal icon" />
-                </div>
-              </div>
-            </div>
-
-            <div class="goalwrapper goalwrapper_padding">
-              <h3>ADAPTIVE SCALABILITY</h3>
-              <p>AI Tools that grow alongside you.</p>
-              <span>
-                We proactively ensure that your solutions meet new demands, so
-                that as you grow, your processes and systems remain
-                optimised—enabling confident and sustainable scaling.
-              </span>
-              <div class="goalouter_circle">
-                <div class="goalinner_circle">
-                  <img src={goalicon2} alt="goal icon" />
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="fouthsubflexdiv">
-            <div class="goalwrapper goalwrapper_padding">
-              <h3>MAX RESULTS, LOW OVERHEAD </h3>
-              <p>Achieve more without heavy costs! </p>
-              <span>
-                By optimising processes, we help you achieve peak performance
-                while keeping operational costs in check.
-              </span>
-              <div class="goalouter_circle">
-                <div class="goalinner_circle">
-                  <img src={goalicon2} alt="goal icon" />
-                </div>
-              </div>
-            </div>{" "}
-            <div class="goalwrapper goalwrapper_padding">
-              <h3>EMPOWERED HUMAN CAPITAL </h3>
-              <p> Empower your team to perform at their best.</p>
-              <span>
-                Alleviate frustrations, mitigate risks, and manage routine
-                tasks, allowing your employees to focus on creativity,
-                innovation, and high-value work—leading to a more engaged,
-                productive, and motivated workforce.
-              </span>
-              <div class="goalouter_circle">
-                <div class="goalinner_circle">
-                  <img src={goalicon2} alt="goal icon" />
-                </div>
-              </div>
-            </div>{" "}
-            <div class="goalwrapper goalwrapper_padding">
-              <h3>
-                {" "}
-                BE A DIFFERENT
-                <br />
-                IATOR{" "}
-              </h3>
-              <p>Stand out from the crowd.</p>
-              <span>
-                Our bespoke solutions enable you to offer distinctive
-                capabilities that set you apart from competitors.
-              </span>
-              <div class="goalouter_circle">
-                <div class="goalinner_circle">
-                  <img src={goalicon2} alt="goal icon" />
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        {/* ================================== */}
-        <div className="w-full h-full p-2 flex flex-col items-start">
-          <motion.h3
-            className="partner_heading animate-text my-10"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: false, amount: 0.3 }}
-            transition={{ duration: 0.2, ease: "easeOut" }}
-          >
-            Partner with us to
-            <br /> achieve your vision and mission
-          </motion.h3>
-          <div className="fifthflexidv">
-            <PartnerSection
-              number={1}
-              subheading="We solve your unique problems."
-              heading="BESPOKE SOLUTIONS "
-              content="We work closely with you to design and deliver bespoke solutions, ensuring that our AI tools are fine-tuned to address your unique business challenges and requirements."
-            />
-            <PartnerSection
-              number={2}
-              subheading="PARTNERSHIP FOR LASTING IMPACT "
-              heading="PARTNERSHIP FOR LASTING IMPACT "
-              content="We work closely with you to design and deliver bespoke solutions, ensuring that our AI tools are fine-tuned to address your unique business challenges and requirements."
-            />
-            <PartnerSection
-              number={3}
-              subheading="Resolve business challenges seamlessly and effortlessly."
-              heading="SEAMLESS INTEGRATION"
-              content="Our solutions are designed to work seamlessly with your existing systems, minimising disruption and ensuring a swift and efficient transition."
-            />
-            <PartnerSection
-              number={4}
-              subheading="Years of experience, young creative minds, and a passion for problem-solving and innovation."
-              heading="EXPERTISE"
-              content="With deep industry knowledge, a flair for creativity, experience, and a commitment to innovation, we don’t just offer technology—we partner with you and provide consultancy to unlock your business’s full potential by clearly identifying challenges, discerning opportunities for improvement, and understanding your unique requirements to develop superior solutions."
-            />
-          </div>
-        </div>
-      </Section>
-      <BlackSection>
-        <div className="w-50 h-full p-2 flex flex-col items-start justify-evenly">
-          <motion.h3
-            className="logo_subheading animate-text"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: false, amount: 0.3 }}
-            transition={{ duration: 0.2, ease: "easeOut" }}
-          >
-            Your bold idea, our smart solutions
-          </motion.h3>
-
-          <motion.h1
-            className="logo_heading animate-text"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: false, amount: 0.3 }}
+            viewport={{ once: true, amount: 0.3 }}
             transition={{ duration: 0.2, ease: "easeOut" }}
           >
             Reinvent
-            <br /> Your
-            <br /> business
           </motion.h1>
-          <button className="logo_button">
-            <motion.div
-              className="flex flex-col mx-4"
-              style={{ lineHeight: "0px", gap: "-2rem" }}
-              initial={{ opacity: 0 }}
-              animate={{
-                opacity: [1, 0],
-              }}
-              transition={{
-                duration: 1,
-                repeat: Infinity,
-                repeatType: "loop",
-                ease: "easeInOut",
-                delay: 2,
-              }}
-            >
-              <motion.i
-                className="bi bi-chevron-down"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: [1, 0] }}
-                transition={{
-                  duration: 1,
-                  delay: 0,
-                  repeat: Infinity,
-                  repeatType: "loop",
-                  ease: "easeInOut",
-                }}
-              />
-
-              <motion.i
-                className="bi bi-chevron-down"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: [0, 1, 0] }}
-                transition={{
-                  duration: 1,
-                  delay: 2,
-                  repeat: Infinity,
-                  repeatType: "loop",
-                  ease: "easeInOut",
-                }}
-              />
-            </motion.div>
-            Continue TO scroll
-            <motion.div
-              className="flex flex-col mx-4"
-              style={{ lineHeight: "0px", gap: "-2rem" }}
-              initial={{ opacity: 0 }}
-              animate={{
-                opacity: [1, 0],
-              }}
-              transition={{
-                duration: 1,
-                repeat: Infinity,
-                repeatType: "loop",
-                ease: "easeInOut",
-                delay: 2,
-              }}
-            >
-              <motion.i
-                className="bi bi-chevron-down"
-                initial={{ opacity: 0 }}
-                style={{ lineHeight: "-10px" }}
-                animate={{ opacity: [1, 0] }}
-                transition={{
-                  duration: 1,
-                  delay: 0,
-                  repeat: Infinity,
-                  repeatType: "loop",
-                  ease: "easeInOut",
-                }}
-              />
-
-              <motion.i
-                className="bi bi-chevron-down"
-                style={{ lineHeight: "-10px" }}
-                initial={{ opacity: 0 }}
-                animate={{ opacity: [0, 1, 0] }}
-                transition={{
-                  duration: 1,
-                  delay: 2,
-                  repeat: Infinity,
-                  repeatType: "loop",
-                  ease: "easeInOut",
-                }}
-              />
-            </motion.div>
-          </button>
-        </div>
-      </BlackSection>
-      <Section>
-        <div className="footer_maindiv">
-          <motion.div
-            className="flex flex-col justify-start max-h-max footersection"
-            initial={{ opacity: 0, y: 30 }}
+          <motion.h2
+            className="frontsubheading animate-text"
+            initial={{ opacity: 0, y: "120px" }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: false, amount: 0.3 }}
+            viewport={{ once: true, amount: 0.3 }}
             transition={{ duration: 0.2, ease: "easeOut" }}
           >
-            <motion.img
-              src={logoimage}
-              alt="logo_image"
-              className="footer_logo_image"
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: false, amount: 0.3 }}
-              transition={{ duration: 0.2, ease: "easeOut" }}
-            />
+            Value Chain
+          </motion.h2>
+          <div className="w-full mt-10 flex items-end justify-end">
             <motion.p
-              className="my-16 animate-text"
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: false, amount: 0.3 }}
-              transition={{ duration: 0.2, ease: "easeOut" }}
+              className="frontsubpara"
+              initial={{ opacity: 0, x: "120px" }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.3, ease: "easeOut" }}
             >
-              Newcastle Upon Tyne
-              <br />
-              Indore
-              <br />
-              Surat (Coming Soon !)
+              Reinvent the value chain and solve unique problems to enhance
+              productivity, efficiency, and profitability with Bespoke GenAI
+              solutions.
             </motion.p>
-            <motion.span
-              className="text-2xl font-poppins font-bold firstfooterspan"
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: false, amount: 0.3 }}
-              transition={{ duration: 0.2, ease: "easeOut" }}
-            >
-              <i className="bi bi-c-circle"></i> 2025 Altus
-            </motion.span>
-          </motion.div>
+          </div>
+          {/* ================================== */}
+          <div className="flex flex-col mt-10 items-center">
+            <div className="w-full secondboxbg rounded-md flex flex-col justify-center items-center p-4">
+              <motion.h3
+                className="secondsectionheading animate-text"
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: false, amount: 0.3 }}
+                transition={{ duration: 0.2, ease: "easeOut" }}
+              >
+                REINVENTION
+              </motion.h3>
 
-          <motion.div
-            className="flex flex-col max-h-max footersection"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: false, amount: 0.3 }}
-            transition={{ duration: 0.2, ease: "easeOut" }}
-          >
+              <motion.h4
+                className="secondsectionsubheading animate-text"
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: false, amount: 0.3 }}
+                transition={{ duration: 0.2, ease: "easeOut" }}
+              >
+                STRATEGY FOR SUCCESS
+              </motion.h4>
+              <motion.p
+                className="secondsectionsubpara animate-text"
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: false, amount: 0.3 }}
+                transition={{ duration: 0.2, ease: "easeOut" }}
+              >
+                The rate of change affecting businesses has risen over 183% in
+                the last 4 years. To counter this, 83% of organisations have
+                accelerated the execution of reinvention with GenAI.
+              </motion.p>
+            </div>
             <motion.p
+              className="secondsectionpara animate-text"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: false, amount: 0.3 }}
               transition={{ duration: 0.2, ease: "easeOut" }}
             >
-              Twitter/X
+              More than double the revenue in less than half the time compared
+              to competitors.
             </motion.p>
-            <motion.p
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: false, amount: 0.3 }}
-              transition={{ duration: 0.2, ease: "easeOut" }}
-            >
-              Instagram
-            </motion.p>
-            <motion.p
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: false, amount: 0.3 }}
-              transition={{ duration: 0.2, ease: "easeOut" }}
-            >
-              Linkedin
-            </motion.p>
-            <motion.span
-              className="my-6 animate-text"
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: false, amount: 0.3 }}
-              transition={{ duration: 0.2, ease: "easeOut" }}
-            >
-              Reinvent your business
-            </motion.span>
-            <motion.p
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: false, amount: 0.3 }}
-              transition={{ duration: 0.2, ease: "easeOut" }}
-            >
-              support@example.com
-            </motion.p>
-          </motion.div>
-
-          <motion.div
-            className="flex flex-col max-h-max footersection2"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: false, amount: 0.3 }}
-            transition={{ duration: 0.2, ease: "easeOut" }}
-          >
-            <motion.h3
-              className="my-4 animate-text"
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: false, amount: 0.3 }}
-              transition={{ duration: 0.2, ease: "easeOut" }}
-            >
-              Get in Touch with us
-            </motion.h3>
-            <div className="px-5 w-full">
-              <div className="footer_input_container">
-                <motion.input
-                  className="footer_input"
-                  placeholder="Your Email"
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: false, amount: 0.3 }}
-                  transition={{ duration: 0.2, ease: "easeOut" }}
+            <div className="  firstflexidv ">
+              <motion.div
+                className="px-4 py-4 flex flex-col mx-2 items-center justify-evenly subboxshadow rounded-md w-1/4"
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: false, amount: 0.3 }}
+                transition={{ duration: 0.2, ease: "easeOut" }}
+              >
+                <img
+                  src={secondsectionimage1}
+                  alt="secondsectionimage1"
+                  className="w-12"
                 />
-                <motion.span
+                <h3 className="secondsectionspannumber">2.5x</h3>
+                <p className="secondsectionlastpara">
+                  Greater improvements in productivity
+                </p>
+              </motion.div>
+              <motion.div
+                className="px-4 py-4 flex flex-col mx-2 items-center justify-evenly subboxshadow bg-white rounded-md w-1/4"
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: false, amount: 0.3 }}
+                transition={{ duration: 0.2, ease: "easeOut" }}
+              >
+                <img
+                  src={secondsectionimage2}
+                  alt="secondsectionimage2"
+                  className="w-12"
+                />
+                <h3 className="secondsectionspannumber">2.6x</h3>
+                <p className="secondsectionlastpara">
+                  higher average revenue growth
+                </p>
+              </motion.div>
+            </div>
+          </div>
+          {/* ================================== */}
+          <div className="w-full py-16">
+            <motion.h1
+              className="thirdSectionheading animate-text"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: false, amount: 0.3 }}
+              transition={{ duration: 0.2, ease: "easeOut" }}
+            >
+              GEN AI IN ACTION
+            </motion.h1>
+            <div className="secondflexidv">
+              <motion.div
+                className="w-1/3 px-4 py-4 bg-orange-700 fourthbox relative"
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: false, amount: 0.3 }}
+                transition={{ duration: 0.2, ease: "easeOut" }}
+              >
+                <img src={fourthIcon1} alt="fourthIcon1" />
+                <h3 className="fourthboxheading">3M</h3>
+                <p className="fourthboxsubheading">Hours Saved</p>
+                <span className="fourthbox_arrow">
+                  <i className="bi bi-chevron-right"></i>
+                </span>
+                <div className="fourth_subcircle"></div>
+                <motion.p
+                  className="new-paragraph"
                   initial={{ opacity: 0, y: 30 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: false, amount: 0.3 }}
                   transition={{ duration: 0.2, ease: "easeOut" }}
                 >
-                  <i className="bi bi-arrow-right"></i>
-                </motion.span>
+                  An agency saved 3 million operational hours by using GenAI.
+                </motion.p>
+              </motion.div>
+
+              <motion.div
+                className="w-1/3 px-4 py-4 bg-orange-700 fourthbox"
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: false, amount: 0.3 }}
+                transition={{ duration: 0.2, ease: "easeOut" }}
+              >
+                <img src={fourthIcon2} alt="fourthIcon2" className="w-16" />
+                <h3 className="fourthboxheading">16M</h3>
+                <p className="fourthboxsubheading">CUSTOMER OFFERINGS</p>
+                <span className="fourthbox_arrow">
+                  <i className="bi bi-chevron-right"></i>
+                </span>
+                <div className="fourth_subcircle"></div>
+                <motion.p
+                  className="new-paragraph"
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: false, amount: 0.3 }}
+                  transition={{ duration: 0.2, ease: "easeOut" }}
+                >
+                  A company delivered 16 million personalised offerings to its
+                  customers within 3 months.
+                </motion.p>
+              </motion.div>
+
+              <motion.div
+                className="w-1/3 px-4 py-4 bg-orange-700 fourthbox"
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: false, amount: 0.3 }}
+                transition={{ duration: 0.2, ease: "easeOut" }}
+              >
+                <img src={fourthIcon3} alt="fourthIcon3" className="w-16" />
+                <h3 className="fourthboxheading">+10%</h3>
+                <p className="fourthboxsubheading">Revenue</p>
+                <span className="fourthbox_arrow">
+                  <i className="bi bi-chevron-right"></i>
+                </span>
+                <div className="fourth_subcircle"></div>
+                <motion.p
+                  className="new-paragraph"
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: false, amount: 0.3 }}
+                  transition={{ duration: 0.2, ease: "easeOut" }}
+                >
+                  An insurer increased potential revenue by 10% using AI in just
+                  one function of the entire process.
+                </motion.p>
+              </motion.div>
+            </div>
+          </div>
+          {/* ================================== */}
+          <div className="w-full py-8 ">
+            <motion.h1
+              className="fouthSectionheading animate-text"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: false, amount: 0.3 }}
+              transition={{ duration: 0.2, ease: "easeOut" }}
+            >
+              Our suite of Solutions
+            </motion.h1>
+            <div className=" thirdflexidv">
+              <motion.div
+                className="oursite_box"
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: false, amount: 0.3 }}
+                transition={{ duration: 0.2, ease: "easeOut" }}
+              >
+                <h3>AGENTIC AI ASSISTANT FOR CUSTOMER SERVICE</h3>
+                <p>
+                  Eliminate unique customer frustrations and operational issues
+                  to deliver a seamless experience that keeps them coming back,
+                  all while driving greater operational efficiency and
+                  productivity with the bespoke Agentic AI assistant for
+                  customer service.
+                </p>
+                <motion.button
+                  className="oursite_box_link"
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: false, amount: 0.3 }}
+                  transition={{ duration: 0.2, ease: "easeOut" }}
+                >
+                  Learn More
+                </motion.button>
+              </motion.div>
+              <motion.div
+                className="oursite_box"
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: false, amount: 0.3 }}
+                transition={{ duration: 0.2, ease: "easeOut" }}
+              >
+                <h3>AI WORKFORCE FOR BACK-END OPERATIONS </h3>
+                <p>
+                  Imagine a workplace where challenges are met head-on,
+                  departments thrive, and employees are empowered to focus on
+                  creativity and innovation—all driven by bespoke AI solutions
+                  applicable throughout the value chain, designed to solve your
+                  unique business problems and inefficiencies.
+                </p>
+                <motion.button
+                  className="oursite_box_link"
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: false, amount: 0.3 }}
+                  transition={{ duration: 0.2, ease: "easeOut" }}
+                >
+                  Learn More
+                </motion.button>
+              </motion.div>
+            </div>
+          </div>
+          {/* ================================== */}
+          <div className="w-full p-2 h-full ">
+            <motion.h3
+              className="goalachieve_heading animate-text my-10"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: false, amount: 0.3 }}
+              transition={{ duration: 0.2, ease: "easeOut" }}
+            >
+              Achieve Your Goals <br /> with Altus Solutions
+            </motion.h3>
+            <div className="fourthflexidv">
+              <div class="goalwrapper goalwrapper_padding">
+                <h3>BOOST YOUR SUCCESS</h3>
+                <p>
+                  Our goal is to help you overcome obstacles and unlock your
+                  full potential. 
+                </p>
+                <span>
+                  Our intelligent solutions address unique challenges, enhance
+                  customer experiences, and drive innovation, setting you apart
+                  in a competitive landscape.
+                </span>
+                <div class="goalouter_circle">
+                  <div class="goalinner_circle">
+                    <img src={goalicon1} alt="goal icon" />
+                  </div>
+                </div>
+              </div>
+
+              <div class="goalwrapper goalwrapper_padding">
+                <h3>ADAPTIVE SCALABILITY</h3>
+                <p>AI Tools that grow alongside you.</p>
+                <span>
+                  We proactively ensure that your solutions meet new demands, so
+                  that as you grow, your processes and systems remain
+                  optimised—enabling confident and sustainable scaling.
+                </span>
+                <div class="goalouter_circle">
+                  <div class="goalinner_circle">
+                    <img src={goalicon2} alt="goal icon" />
+                  </div>
+                </div>
               </div>
             </div>
-          </motion.div>
-        </div>
-      </Section>
+            <div className="fouthsubflexdiv">
+              <div class="goalwrapper goalwrapper_padding">
+                <h3>MAX RESULTS, LOW OVERHEAD </h3>
+                <p>Achieve more without heavy costs! </p>
+                <span>
+                  By optimising processes, we help you achieve peak performance
+                  while keeping operational costs in check.
+                </span>
+                <div class="goalouter_circle">
+                  <div class="goalinner_circle">
+                    <img src={goalicon2} alt="goal icon" />
+                  </div>
+                </div>
+              </div>{" "}
+              <div class="goalwrapper goalwrapper_padding">
+                <h3>EMPOWERED HUMAN CAPITAL </h3>
+                <p> Empower your team to perform at their best.</p>
+                <span>
+                  Alleviate frustrations, mitigate risks, and manage routine
+                  tasks, allowing your employees to focus on creativity,
+                  innovation, and high-value work—leading to a more engaged,
+                  productive, and motivated workforce.
+                </span>
+                <div class="goalouter_circle">
+                  <div class="goalinner_circle">
+                    <img src={goalicon2} alt="goal icon" />
+                  </div>
+                </div>
+              </div>{" "}
+              <div class="goalwrapper goalwrapper_padding">
+                <h3>
+                  {" "}
+                  BE A DIFFERENT
+                  <br />
+                  IATOR{" "}
+                </h3>
+                <p>Stand out from the crowd.</p>
+                <span>
+                  Our bespoke solutions enable you to offer distinctive
+                  capabilities that set you apart from competitors.
+                </span>
+                <div class="goalouter_circle">
+                  <div class="goalinner_circle">
+                    <img src={goalicon2} alt="goal icon" />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          {/* ================================== */}
+          <div className="w-full h-full p-2 flex flex-col items-start">
+            <motion.h3
+              className="partner_heading animate-text my-10"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: false, amount: 0.3 }}
+              transition={{ duration: 0.2, ease: "easeOut" }}
+            >
+              Partner with us to
+              <br /> achieve your vision and mission
+            </motion.h3>
+            <div className="fifthflexidv">
+              <PartnerSection
+                number={1}
+                subheading="We solve your unique problems."
+                heading="BESPOKE SOLUTIONS "
+                content="We work closely with you to design and deliver bespoke solutions, ensuring that our AI tools are fine-tuned to address your unique business challenges and requirements."
+              />
+              <PartnerSection
+                number={2}
+                subheading="PARTNERSHIP FOR LASTING IMPACT "
+                heading="PARTNERSHIP FOR LASTING IMPACT "
+                content="We work closely with you to design and deliver bespoke solutions, ensuring that our AI tools are fine-tuned to address your unique business challenges and requirements."
+              />
+              <PartnerSection
+                number={3}
+                subheading="Resolve business challenges seamlessly and effortlessly."
+                heading="SEAMLESS INTEGRATION"
+                content="Our solutions are designed to work seamlessly with your existing systems, minimising disruption and ensuring a swift and efficient transition."
+              />
+              <PartnerSection
+                number={4}
+                subheading="Years of experience, young creative minds, and a passion for problem-solving and innovation."
+                heading="EXPERTISE"
+                content="With deep industry knowledge, a flair for creativity, experience, and a commitment to innovation, we don’t just offer technology—we partner with you and provide consultancy to unlock your business’s full potential by clearly identifying challenges, discerning opportunities for improvement, and understanding your unique requirements to develop superior solutions."
+              />
+            </div>
+          </div>
+        </Section>
+        <BlackSection>
+          <div className="w-50 h-full p-2 flex flex-col items-start justify-evenly">
+            <motion.h3
+              className="logo_subheading animate-text"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: false, amount: 0.3 }}
+              transition={{ duration: 0.2, ease: "easeOut" }}
+            >
+              Your bold idea, our smart solutions
+            </motion.h3>
+
+            <motion.h1
+              className="logo_heading animate-text"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: false, amount: 0.3 }}
+              transition={{ duration: 0.2, ease: "easeOut" }}
+            >
+              Reinvent
+              <br /> Your
+              <br /> business
+            </motion.h1>
+            <button className="logo_button">
+              <motion.div
+                className="flex flex-col mx-4"
+                style={{ lineHeight: "0px", gap: "-2rem" }}
+                initial={{ opacity: 0 }}
+                animate={{
+                  opacity: [1, 0],
+                }}
+                transition={{
+                  duration: 1,
+                  repeat: Infinity,
+                  repeatType: "loop",
+                  ease: "easeInOut",
+                  delay: 2,
+                }}
+              >
+                <motion.i
+                  className="bi bi-chevron-down"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: [1, 0] }}
+                  transition={{
+                    duration: 1,
+                    delay: 0,
+                    repeat: Infinity,
+                    repeatType: "loop",
+                    ease: "easeInOut",
+                  }}
+                />
+
+                <motion.i
+                  className="bi bi-chevron-down"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: [0, 1, 0] }}
+                  transition={{
+                    duration: 1,
+                    delay: 2,
+                    repeat: Infinity,
+                    repeatType: "loop",
+                    ease: "easeInOut",
+                  }}
+                />
+              </motion.div>
+              Continue TO scroll
+              <motion.div
+                className="flex flex-col mx-4"
+                style={{ lineHeight: "0px", gap: "-2rem" }}
+                initial={{ opacity: 0 }}
+                animate={{
+                  opacity: [1, 0],
+                }}
+                transition={{
+                  duration: 1,
+                  repeat: Infinity,
+                  repeatType: "loop",
+                  ease: "easeInOut",
+                  delay: 2,
+                }}
+              >
+                <motion.i
+                  className="bi bi-chevron-down"
+                  initial={{ opacity: 0 }}
+                  style={{ lineHeight: "-10px" }}
+                  animate={{ opacity: [1, 0] }}
+                  transition={{
+                    duration: 1,
+                    delay: 0,
+                    repeat: Infinity,
+                    repeatType: "loop",
+                    ease: "easeInOut",
+                  }}
+                />
+
+                <motion.i
+                  className="bi bi-chevron-down"
+                  style={{ lineHeight: "-10px" }}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: [0, 1, 0] }}
+                  transition={{
+                    duration: 1,
+                    delay: 2,
+                    repeat: Infinity,
+                    repeatType: "loop",
+                    ease: "easeInOut",
+                  }}
+                />
+              </motion.div>
+            </button>
+          </div>
+        </BlackSection>
+        <Section>
+          <div className="footer_maindiv">
+            <motion.div
+              className="flex flex-col justify-start max-h-max footersection"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: false, amount: 0.3 }}
+              transition={{ duration: 0.2, ease: "easeOut" }}
+            >
+              <motion.img
+                src={logoimage}
+                alt="logo_image"
+                className="footer_logo_image"
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: false, amount: 0.3 }}
+                transition={{ duration: 0.2, ease: "easeOut" }}
+              />
+              <motion.p
+                className="my-16 animate-text"
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: false, amount: 0.3 }}
+                transition={{ duration: 0.2, ease: "easeOut" }}
+              >
+                Newcastle Upon Tyne
+                <br />
+                Indore
+                <br />
+                Surat (Coming Soon !)
+              </motion.p>
+              <motion.span
+                className="text-2xl font-poppins font-bold firstfooterspan"
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: false, amount: 0.3 }}
+                transition={{ duration: 0.2, ease: "easeOut" }}
+              >
+                <i className="bi bi-c-circle"></i> 2025 Altus
+              </motion.span>
+            </motion.div>
+
+            <motion.div
+              className="flex flex-col max-h-max footersection"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: false, amount: 0.3 }}
+              transition={{ duration: 0.2, ease: "easeOut" }}
+            >
+              <motion.p
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: false, amount: 0.3 }}
+                transition={{ duration: 0.2, ease: "easeOut" }}
+              >
+                Twitter/X
+              </motion.p>
+              <motion.p
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: false, amount: 0.3 }}
+                transition={{ duration: 0.2, ease: "easeOut" }}
+              >
+                Instagram
+              </motion.p>
+              <motion.p
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: false, amount: 0.3 }}
+                transition={{ duration: 0.2, ease: "easeOut" }}
+              >
+                Linkedin
+              </motion.p>
+              <motion.span
+                className="my-6 animate-text"
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: false, amount: 0.3 }}
+                transition={{ duration: 0.2, ease: "easeOut" }}
+              >
+                Reinvent your business
+              </motion.span>
+              <motion.p
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: false, amount: 0.3 }}
+                transition={{ duration: 0.2, ease: "easeOut" }}
+              >
+                support@example.com
+              </motion.p>
+            </motion.div>
+
+            <motion.div
+              className="flex flex-col max-h-max footersection2"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: false, amount: 0.3 }}
+              transition={{ duration: 0.2, ease: "easeOut" }}
+            >
+              <motion.h3
+                className="my-4 animate-text"
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: false, amount: 0.3 }}
+                transition={{ duration: 0.2, ease: "easeOut" }}
+              >
+                Get in Touch with us
+              </motion.h3>
+              <div className="px-5 w-full">
+                <div className="footer_input_container">
+                  <motion.input
+                    className="footer_input"
+                    placeholder="Your Email"
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: false, amount: 0.3 }}
+                    transition={{ duration: 0.2, ease: "easeOut" }}
+                  />
+                  <motion.span
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: false, amount: 0.3 }}
+                    transition={{ duration: 0.2, ease: "easeOut" }}
+                  >
+                    <i className="bi bi-arrow-right"></i>
+                  </motion.span>
+                </div>
+              </div>
+            </motion.div>
+          </div>
+        </Section>
+      </div>
     </Scroll>
   );
 });

@@ -14,23 +14,36 @@ const AboutPage = () => {
   const [isShowoverlay, setIsShowoverlay] = useState(false);
   const [scrollPages, setScrollPages] = useState(7.2);
   const navigate = useNavigate();
+  const contactSectionRef = useRef(null);
 
+  const handleResize = () => {
+    setIsMobile(window.innerWidth <= 768);
+  };
 
-   const handleResize = () => {
-     setIsMobile(window.innerWidth <= 768);
-   };
- 
-   useEffect(() => {
-     window.addEventListener("resize", handleResize);
-     return () => {
-       window.removeEventListener("resize", handleResize);
-     };
-   }, []);
- 
-   const updateScrollPages = (pages) => {
-    console.log(pages  ,  "at the About Page ")
-     setScrollPages(pages);
-   };
+  useEffect(() => {
+    const calculateScrollPages = () => {
+      if (contactSectionRef.current) {
+        const indexSectionHeight = contactSectionRef.current?.clientHeight || 0;
+        const windowHeight = window.innerHeight || 1;
+        const pages = indexSectionHeight / windowHeight;
+        setScrollPages(Math.max(pages, 3));
+      }
+    };
+    const handleResizeEvent = () => {
+      handleResize();
+      calculateScrollPages();
+    };
+
+    window.addEventListener("resize", handleResizeEvent);
+
+    return () => {
+      window.removeEventListener("resize", handleResizeEvent);
+    };
+  }, []);
+
+  const updateScrollPages = (pages) => {
+    setScrollPages(pages);
+  };
 
   const Navigate_Home = () => navigate("/");
   const Navigate_AboutUs = () => navigate("/AboutUs");
@@ -73,9 +86,10 @@ const AboutPage = () => {
           <OrbitControls enableZoom={false} />
           <ScrollControls pages={scrollPages} damping={1.25} infinite={false}>
             <Scroll>
-
-              <AboutSection onScrollPagesChange={updateScrollPages} />
-           
+              <AboutSection
+                onScrollPagesChange={updateScrollPages}
+                ref={contactSectionRef}
+              />
               <CombinedMeshes position={[0, 0, -3]} />
             </Scroll>
           </ScrollControls>

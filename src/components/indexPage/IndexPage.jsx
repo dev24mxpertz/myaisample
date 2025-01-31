@@ -111,8 +111,6 @@
 
 // Parent Component: IndexPage
 
-
-
 import { Canvas } from "@react-three/fiber";
 import "./IndexPage.css";
 import React, { useEffect, useState, useRef } from "react";
@@ -129,20 +127,34 @@ const IndexPage = () => {
   const [isShowoverlay, setIsShowoverlay] = useState(false);
   const [scrollPages, setScrollPages] = useState(3);
   const navigate = useNavigate();
+  const indexSectionRef = useRef(null);
 
   const handleResize = () => {
     setIsMobile(window.innerWidth <= 768);
   };
 
   useEffect(() => {
-    window.addEventListener("resize", handleResize);
+    const calculateScrollPages = () => {
+      if (indexSectionRef.current) {
+        const indexSectionHeight = indexSectionRef.current?.clientHeight || 0;
+        const windowHeight = window.innerHeight || 1;
+        const pages = indexSectionHeight / windowHeight;
+        setScrollPages(Math.max(pages, 3));
+      }
+    };
+    const handleResizeEvent = () => {
+      handleResize();
+      calculateScrollPages();
+    };
+
+    window.addEventListener("resize", handleResizeEvent);
+
     return () => {
-      window.removeEventListener("resize", handleResize);
+      window.removeEventListener("resize", handleResizeEvent);
     };
   }, []);
 
   const updateScrollPages = (pages) => {
-    console.log(pages, "at the index Page ");
     setScrollPages(pages);
   };
 
@@ -187,7 +199,10 @@ const IndexPage = () => {
           <OrbitControls enableZoom={false} />
           <ScrollControls pages={scrollPages} damping={1.25} infinite={false}>
             <Scroll>
-              <IndexSection onScrollPagesChange={updateScrollPages} />
+              <IndexSection
+                ref={indexSectionRef}
+                onScrollPagesChange={updateScrollPages}
+              />
               <CombinedMeshes position={[0, 0, -3]} />
             </Scroll>
           </ScrollControls>

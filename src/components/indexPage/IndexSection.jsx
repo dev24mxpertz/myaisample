@@ -62,7 +62,7 @@ const PartnerSection = ({ number, heading, content, subheading }) => {
 };
 
 const IndexSection = forwardRef(({ onScrollPagesChange }, ref) => {
-  const localRef = useRef(null)
+  const localRef = useRef(null);
   useLayoutEffect(() => {
     let debounceTimeout;
 

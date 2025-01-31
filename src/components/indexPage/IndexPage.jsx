@@ -136,8 +136,8 @@ const IndexPage = () => {
   useEffect(() => {
     const calculateScrollPages = () => {
       if (indexSectionRef.current) {
-        const indexSectionHeight = indexSectionRef.current?.clientHeight || 0;
-        const windowHeight = window.innerHeight || 1;
+        const indexSectionHeight = indexSectionRef.current?.clientHeight ;
+        const windowHeight = window.innerHeight ;
         const pages = indexSectionHeight / windowHeight;
         setScrollPages(Math.max(pages, 3));
       }

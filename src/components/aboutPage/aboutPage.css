@@ -61,12 +61,13 @@
 
 .About_Section_para2 {
   font-family: Open Sans;
-  font-size: 40px;
-  font-weight: 500;
-  line-height: 54.47px;
-  text-align: left;
-  text-underline-position: from-font;
-  text-decoration-skip-ink: none;
+font-size: 40px;
+font-weight: 700;
+line-height: 54.47px;
+text-align: left;
+text-underline-position: from-font;
+text-decoration-skip-ink: none;
+  text-transform: uppercase;
   color: rgba(148, 148, 148, 1);
 }
 

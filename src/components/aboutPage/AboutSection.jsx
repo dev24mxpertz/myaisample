@@ -32,47 +32,23 @@ const BlackSection = (props) => {
   );
 };
 
-const PartnerSection = ({ heading, content }) => {
-  const [isHovered, setIsHovered] = useState(false);
-
-  // Event handlers for hover
-  const handleMouseEnter = () => setIsHovered(true);
-  const handleMouseLeave = () => setIsHovered(false);
-
+const PartnerSection = ({ number, heading, content, subheading }) => {
   return (
-    <div
-      className="partner_section2"
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
-    >
-      {/* Arrow Icon with rotation animation */}
-      <motion.span
-        className="partner_arrow2"
-        animate={{ rotate: isHovered ? 180 : 45 }}
-        transition={{ duration: 0.3 }}
-      >
-        <i className={`bi bi-arrow-up ${isHovered ? "rotated" : ""}`}></i>
-      </motion.span>
+    <div className="partner_section">
+      <span className="partner_arrow">
+        <i className="bi bi-arrow-up"></i>
+      </span>
 
-      {/* Heading with fade-in effect on hover */}
-      <motion.h3
-        initial={{ opacity: 0 }}
-        animate={{ opacity: isHovered ? 1 : 0.7 }}
-        transition={{ duration: 0.3 }}
-      >
-        {isHovered
-          ? "Your success is our priority, now and in the future."
-          : "How We Work?"}
-      </motion.h3>
+      <div className="h-full firstpartner_div">
+        <h3 className="why_choosetext">How We Work?</h3>
+        {/* <h3 className="numbertext">0{number}.</h3> */}
+        <h3 className="headingtext">{heading}</h3>
+      </div>
 
-      {/* Paragraph content with fade-in effect on hover */}
-      <motion.p
-        initial={{ opacity: 0 }}
-        animate={{ opacity: isHovered ? 1 : 0.7 }}
-        transition={{ duration: 0.3 }}
-      >
-        {isHovered ? content : heading}
-      </motion.p>
+      <div className="nextdiv">
+        <h4 className="nextdiv_h4">{subheading}</h4>
+        <p className="nextdiv_p">{content}</p>
+      </div>
     </div>
   );
 };
@@ -317,7 +293,7 @@ const AboutSection = forwardRef(({ onScrollPagesChange }, ref) => {
             </motion.h2>
 
             <motion.p
-              className="About_Section_para4"
+              className="About_Section_para4 my-4"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.3 }}
@@ -327,22 +303,30 @@ const AboutSection = forwardRef(({ onScrollPagesChange }, ref) => {
               objectives, challenges, and current processes.
             </motion.p>
 
-            <div className="About_Sectionflex4">
+            <div className="fifthflexidv">
               <PartnerSection
-                heading="ONGOING SUPPORT AND OPTIMISAION"
-                content="We provide regular updates, ongoing support, and continuous optimisation to ensure your unique challenges are always addressed, and our AI solutions continue delivering value as your business grows."
+                number={1}
+                subheading="We solve your unique problems."
+                heading="BESPOKE SOLUTIONS "
+                content="We work closely with you to design and deliver bespoke solutions, ensuring that our AI tools are fine-tuned to address your unique business challenges and requirements."
               />
               <PartnerSection
-                heading="CONSULTAION AND ASSESSMENT"
-                content="We provide regular updates, ongoing support, and continuous optimisation to ensure your unique challenges are always addressed, and our AI solutions continue delivering value as your business grows."
+                number={2}
+                subheading="PARTNERSHIP FOR LASTING IMPACT "
+                heading="PARTNERSHIP FOR LASTING IMPACT "
+                content="We work closely with you to design and deliver bespoke solutions, ensuring that our AI tools are fine-tuned to address your unique business challenges and requirements."
               />
               <PartnerSection
-                heading="IMPLEMENTA-TION AND TRAINING"
-                content="We provide regular updates, ongoing support, and continuous optimisation to ensure your unique challenges are always addressed, and our AI solutions continue delivering value as your business grows."
+                number={3}
+                subheading="Resolve business challenges seamlessly and effortlessly."
+                heading="SEAMLESS INTEGRATION"
+                content="Our solutions are designed to work seamlessly with your existing systems, minimising disruption and ensuring a swift and efficient transition."
               />
               <PartnerSection
-                heading="SOLUTION DESIGN AND DEVELOPMENT"
-                content="We provide regular updates, ongoing support, and continuous optimisation to ensure your unique challenges are always addressed, and our AI solutions continue delivering value as your business grows."
+                number={4}
+                subheading="Years of experience, young creative minds, and a passion for problem-solving and innovation."
+                heading="EXPERTISE"
+                content="With deep industry knowledge, a flair for creativity, experience, and a commitment to innovation, we don’t just offer technology—we partner with you and provide consultancy to unlock your business’s full potential by clearly identifying challenges, discerning opportunities for improvement, and understanding your unique requirements to develop superior solutions."
               />
             </div>
           </div>

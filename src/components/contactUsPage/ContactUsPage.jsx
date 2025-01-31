@@ -21,8 +21,8 @@ const ContactUsPage = () => {
   useEffect(() => {
     const calculateScrollPages = () => {
       if (contactSectionRef.current) {
-        const indexSectionHeight = contactSectionRef.current?.clientHeight ;
-        const windowHeight = window.innerHeight ;
+        const indexSectionHeight = contactSectionRef.current?.clientHeight || 0;
+        const windowHeight = window.innerHeight || 1;
         const pages = indexSectionHeight / windowHeight;
         setScrollPages(Math.max(pages, 3));
       }

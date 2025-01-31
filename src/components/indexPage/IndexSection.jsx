@@ -124,7 +124,8 @@ const IndexSection = forwardRef(({ onScrollPagesChange }, ref) => {
               solutions.
             </motion.p>
           </div>
-          {/* ================================== */}
+        </Section>
+        <Section>
           <div className="flex flex-col mt-10 items-center">
             <div className="w-full secondboxbg rounded-md flex flex-col justify-center items-center p-4">
               <motion.h3
@@ -205,7 +206,8 @@ const IndexSection = forwardRef(({ onScrollPagesChange }, ref) => {
               </motion.div>
             </div>
           </div>
-          {/* ================================== */}
+        </Section>
+        <Section>
           <div className="w-full py-16">
             <motion.h1
               className="thirdSectionheading animate-text"
@@ -295,7 +297,8 @@ const IndexSection = forwardRef(({ onScrollPagesChange }, ref) => {
               </motion.div>
             </div>
           </div>
-          {/* ================================== */}
+        </Section>
+        <Section>
           <div className="w-full py-8 ">
             <motion.h1
               className="fouthSectionheading animate-text"
@@ -359,7 +362,8 @@ const IndexSection = forwardRef(({ onScrollPagesChange }, ref) => {
               </motion.div>
             </div>
           </div>
-          {/* ================================== */}
+        </Section>
+        <Section>
           <div className="w-full p-2 h-full ">
             <motion.h3
               className="goalachieve_heading animate-text my-10"
@@ -414,7 +418,7 @@ const IndexSection = forwardRef(({ onScrollPagesChange }, ref) => {
                 </span>
                 <div class="goalouter_circle">
                   <div class="goalinner_circle">
-                    <img src={goalicon2} alt="goal icon" />
+                    <img src={goalicon3} alt="goal icon" />
                   </div>
                 </div>
               </div>{" "}
@@ -429,17 +433,12 @@ const IndexSection = forwardRef(({ onScrollPagesChange }, ref) => {
                 </span>
                 <div class="goalouter_circle">
                   <div class="goalinner_circle">
-                    <img src={goalicon2} alt="goal icon" />
+                    <img src={goalicon4} alt="goal icon" />
                   </div>
                 </div>
               </div>{" "}
               <div class="goalwrapper goalwrapper_padding">
-                <h3>
-                  {" "}
-                  BE A DIFFERENT
-                  <br />
-                  IATOR{" "}
-                </h3>
+                <h3> BE A DIFFERENTIATOR</h3>
                 <p>Stand out from the crowd.</p>
                 <span>
                   Our bespoke solutions enable you to offer distinctive
@@ -447,13 +446,14 @@ const IndexSection = forwardRef(({ onScrollPagesChange }, ref) => {
                 </span>
                 <div class="goalouter_circle">
                   <div class="goalinner_circle">
-                    <img src={goalicon2} alt="goal icon" />
+                    <img src={goalicon5} alt="goal icon" />
                   </div>
                 </div>
               </div>
             </div>
           </div>
-          {/* ================================== */}
+        </Section>
+        <Section>
           <div className="w-full h-full p-2 flex flex-col items-start">
             <motion.h3
               className="partner_heading animate-text my-10"

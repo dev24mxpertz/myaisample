@@ -76,8 +76,11 @@ const ContactUsSection = forwardRef(({ onScrollPagesChange }, ref) => {
                 viewport={{ once: false, amount: 0.3 }}
                 transition={{ duration: 0.2, ease: "easeOut" }}
               >
-                3517 W. Gray St. Utica, Pennsylvania 57867
+                Newcastle Upon Tyne
                 <br />
+                Indore
+                <br />
+                Surat (Coming Soon !)
               </motion.p>
               <motion.span
                 className="text-2xl font-poppins font-bold firstfooterspan"
@@ -156,7 +159,7 @@ const ContactUsSection = forwardRef(({ onScrollPagesChange }, ref) => {
               >
                 Get in Touch with us
               </motion.h3>
-              <div className="mx-auto w-full">
+              <div className="px-5 w-full">
                 <div className="footer_input_container">
                   <motion.input
                     className="footer_input"

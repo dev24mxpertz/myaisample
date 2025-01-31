@@ -87,7 +87,7 @@ const AboutSection = forwardRef(({ onScrollPagesChange }, ref) => {
     <Scroll html className="w-full">
       <div ref={localRef}>
         <Section>
-          <div className="w-full h-full flex flex-col items-start justify-center firstaboutsection ">
+          <div className="w-full h-full flex flex-col items-start justify-center firstaboutsection backgroundbox ">
             <motion.h1
               className="About_Section_heading1"
               initial={{ opacity: 0, y: 30 }}
@@ -141,7 +141,7 @@ const AboutSection = forwardRef(({ onScrollPagesChange }, ref) => {
           </div>
         </Section>
         <Section>
-          <div className="w-full h-full flex flex-col items-start justify-center">
+          <div className="w-full h-full flex flex-col items-start justify-center backgroundbox">
             <motion.h2
               className="About_Section_heading3"
               initial={{ opacity: 0, y: 30 }}
@@ -182,7 +182,7 @@ const AboutSection = forwardRef(({ onScrollPagesChange }, ref) => {
           </div>
         </Section>
         <Section>
-          <div className="About_Sectionflex3">
+          <div className="About_Sectionflex3 backgroundbox">
             <div className="About_Sectionflexsub3">
               <motion.h2
                 className="About_Section_heading4"
@@ -231,7 +231,7 @@ const AboutSection = forwardRef(({ onScrollPagesChange }, ref) => {
           </div>
         </Section>
         <Section>
-          <div className="About_Sectionflex3">
+          <div className="About_Sectionflex3 backgroundbox">
             <div className="About_Sectionflexsub3">
               <motion.h2
                 className="About_Section_heading4"
@@ -282,27 +282,27 @@ const AboutSection = forwardRef(({ onScrollPagesChange }, ref) => {
         </Section>
         <Section>
           <div className="w-full h-full p-2 flex flex-col justify-evenly">
-            <motion.h2
-              className="About_Section_heading5"
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.3 }}
-              transition={{ duration: 0.2, ease: "easeOut" }}
-            >
-              HOW WE WORK?
-            </motion.h2>
-
-            <motion.p
-              className="About_Section_para4 my-4"
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.3 }}
-              transition={{ duration: 0.2, ease: "easeOut" }}
-            >
-              We start with an in-depth consultation to understand your business
-              objectives, challenges, and current processes.
-            </motion.p>
-
+            <div className="backgroundbox">
+              <motion.h2
+                className="About_Section_heading5"
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.3 }}
+                transition={{ duration: 0.2, ease: "easeOut" }}
+              >
+                HOW WE WORK?
+              </motion.h2>
+              <motion.p
+                className="About_Section_para4 my-4"
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.3 }}
+                transition={{ duration: 0.2, ease: "easeOut" }}
+              >
+                We start with an in-depth consultation to understand your
+                business objectives, challenges, and current processes.
+              </motion.p>
+            </div>
             <div className="fifthflexidv">
               <PartnerSection
                 number={1}
@@ -469,8 +469,11 @@ const AboutSection = forwardRef(({ onScrollPagesChange }, ref) => {
                 viewport={{ once: false, amount: 0.3 }}
                 transition={{ duration: 0.2, ease: "easeOut" }}
               >
-                3517 W. Gray St. Utica, Pennsylvania 57867
+                Newcastle Upon Tyne
                 <br />
+                Indore
+                <br />
+                Surat (Coming Soon !)
               </motion.p>
               <motion.span
                 className="text-2xl font-poppins font-bold firstfooterspan"

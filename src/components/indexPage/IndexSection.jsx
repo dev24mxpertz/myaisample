@@ -32,7 +32,7 @@ const Section = (props) => {
 
 const BlackSection = (props) => {
   return (
-    <section className="w-full BLACKpaddinghori16 flex bg-black flex-col justify-start items-center">
+    <section className="w-full BLACKpaddinghori16 flex flex-col justify-start items-center">
       <div className="w-full h-full flex justify-end items-center    max-w-[1300px]">
         {props.children}
       </div>
@@ -201,7 +201,7 @@ const IndexSection = forwardRef(({ onScrollPagesChange }, ref) => {
                 />
                 <h3 className="secondsectionspannumber">2.6x</h3>
                 <p className="secondsectionlastpara">
-                  higher average revenue growth
+                  Higher average revenue growth
                 </p>
               </motion.div>
             </div>

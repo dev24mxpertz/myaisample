@@ -29,7 +29,7 @@ const ContactUsSection = forwardRef(({ onScrollPagesChange }, ref) => {
         const indexSectionHeight = localRef.current.clientHeight;
         const windowHeight = window.innerHeight;
         const pages = indexSectionHeight / windowHeight;
-        onScrollPagesChange(Math.max(pages, 3));
+        onScrollPagesChange(Math.max(pages, 1));
       }
     };
 
@@ -40,7 +40,6 @@ const ContactUsSection = forwardRef(({ onScrollPagesChange }, ref) => {
 
     window.addEventListener("resize", handleResize);
 
-    // Delay for initial calculation
     setTimeout(calculateScrollPages, 0);
 
     return () => {

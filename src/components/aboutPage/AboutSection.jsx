@@ -54,6 +54,7 @@ const PartnerSection = ({ number, heading, content, subheading }) => {
 };
 
 const AboutSection = forwardRef(({ onScrollPagesChange }, ref) => {
+  
   const localRef = useRef(null);
 
   useLayoutEffect(() => {
@@ -83,6 +84,11 @@ const AboutSection = forwardRef(({ onScrollPagesChange }, ref) => {
     };
   }, [onScrollPagesChange, localRef]);
 
+
+    const handlelinkedinginclick = () => {
+      window.open("https://www.linkedin.com/company/altusreinvents/", "_blank");
+    };
+    
   return (
     <Scroll html className="w-full">
       <div ref={localRef}>
@@ -299,34 +305,51 @@ const AboutSection = forwardRef(({ onScrollPagesChange }, ref) => {
                 viewport={{ once: true, amount: 0.3 }}
                 transition={{ duration: 0.2, ease: "easeOut" }}
               >
-                We start with an in-depth consultation to understand your
-                business objectives, challenges, and current processes.
+                We collaborate with businesses as strategic partners, offering
+                insightful consultancy to uncover obstacles, seize
+                opportunities, and provide bespoke AI solutions. Our approach
+                doesn’t just solve challenges or mitigate risks—it reinvents
+                your value chain, empowering your team to focus on innovation
+                and high-impact work.
+              </motion.p>
+              <motion.p
+                className="About_Section_para4 my-4"
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.3 }}
+                transition={{ duration: 0.2, ease: "easeOut" }}
+              >
+                Specialising in AI development and consultancy, we create
+                tailored solutions to address unique business needs, streamline
+                both front-end and back-end operations, and eliminate
+                inefficiencies—helping you unlock the potential for sustainable
+                growth and unparalleled efficiency.
               </motion.p>
             </div>
             <div className="fifthflexidv">
               <PartnerSection
                 number={1}
-                subheading="We solve your unique problems."
-                heading="BESPOKE SOLUTIONS "
-                content="We work closely with you to design and deliver bespoke solutions, ensuring that our AI tools are fine-tuned to address your unique business challenges and requirements."
+                subheading=""
+                heading="CONSULTATION AND ASSESSMENT"
+                content="We start with an in-depth consultation to understand your business problems, challenges, objectives, and current processes."
               />
               <PartnerSection
                 number={2}
-                subheading="PARTNERSHIP FOR LASTING IMPACT "
-                heading="PARTNERSHIP FOR LASTING IMPACT "
-                content="We work closely with you to design and deliver bespoke solutions, ensuring that our AI tools are fine-tuned to address your unique business challenges and requirements."
+                subheading=""
+                heading="SOLUTION DESIGN AND DEVELOPMENT"
+                content="Our team designs and develops AI solutions customised to your specific requirements. We ensure seamless integration with your existing systems for a smooth transition and minimal disruption."
               />
               <PartnerSection
                 number={3}
-                subheading="Resolve business challenges seamlessly and effortlessly."
-                heading="SEAMLESS INTEGRATION"
-                content="Our solutions are designed to work seamlessly with your existing systems, minimising disruption and ensuring a swift and efficient transition."
+                subheading=""
+                heading="IMPLEMENTATI ON AND TRAINING"
+                content="We implement AI solutions and provide comprehensive training to your staff, ensuring they are equipped to leverage the new technology effectively."
               />
               <PartnerSection
                 number={4}
-                subheading="Years of experience, young creative minds, and a passion for problem-solving and innovation."
-                heading="EXPERTISE"
-                content="With deep industry knowledge, a flair for creativity, experience, and a commitment to innovation, we don’t just offer technology—we partner with you and provide consultancy to unlock your business’s full potential by clearly identifying challenges, discerning opportunities for improvement, and understanding your unique requirements to develop superior solutions."
+                subheading=""
+                heading="ONGOING SUPPORT AND OPTIMISATION"
+                content="Our commitment to your success doesn’t end with implementation. We offer regular updates to your unique solutions, continuous support and optimisation to ensure your AI solutions remain effective and evolve with your business needs."
               />
             </div>
           </div>
@@ -445,7 +468,7 @@ const AboutSection = forwardRef(({ onScrollPagesChange }, ref) => {
           </div>
         </BlackSection>
         <Section>
-          <div className="footer_maindiv">
+          <div className="footer_maindiv h-[63vh]">
             <motion.div
               className="flex flex-col justify-start max-h-max footersection"
               initial={{ opacity: 0, y: 30 }}
@@ -453,126 +476,53 @@ const AboutSection = forwardRef(({ onScrollPagesChange }, ref) => {
               viewport={{ once: false, amount: 0.3 }}
               transition={{ duration: 0.2, ease: "easeOut" }}
             >
-              <motion.img
-                src={logoimage}
-                alt="logo_image"
-                className="footer_logo_image"
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: false, amount: 0.3 }}
-                transition={{ duration: 0.2, ease: "easeOut" }}
-              />
-              <motion.p
-                className="my-16 animate-text"
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: false, amount: 0.3 }}
-                transition={{ duration: 0.2, ease: "easeOut" }}
-              >
+              <motion.p className="uppercase">
+                <span style={{ color: "rgba(219, 139, 54, 1)" }}>
+                  United Kingdom
+                </span>{" "}
+                <br />
                 Newcastle Upon Tyne
+                <br />
+                <span style={{ color: "rgba(219, 139, 54, 1)" }}>
+                  INDIA
+                </span>{" "}
                 <br />
                 Indore
                 <br />
-                Surat (Coming Soon !)
+                Surat (Coming Soon!)
               </motion.p>
-              <motion.span
-                className="text-2xl font-poppins font-bold firstfooterspan"
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: false, amount: 0.3 }}
-                transition={{ duration: 0.2, ease: "easeOut" }}
-              >
+              <motion.span className="text-2xl font-poppins font-bold">
                 <i className="bi bi-c-circle"></i> 2025 Altus
               </motion.span>
             </motion.div>
 
-            <motion.div
-              className="flex flex-col max-h-max footersection"
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: false, amount: 0.3 }}
-              transition={{ duration: 0.2, ease: "easeOut" }}
-            >
+            <motion.div className="flex flex-col max-h-max footersection">
+              {/* <motion.p>Twitter/X</motion.p> */}
+              {/* <motion.p>Instagram</motion.p> */}
               <motion.p
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: false, amount: 0.3 }}
-                transition={{ duration: 0.2, ease: "easeOut" }}
+                className="cursor-pointer underline underline-offset-4"
+                onClick={handlelinkedinginclick}
               >
-                Twitter/X
+                LinkedIn
               </motion.p>
-              <motion.p
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: false, amount: 0.3 }}
-                transition={{ duration: 0.2, ease: "easeOut" }}
-              >
-                Instagram
-              </motion.p>
-              <motion.p
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: false, amount: 0.3 }}
-                transition={{ duration: 0.2, ease: "easeOut" }}
-              >
-                Linkedin
-              </motion.p>
-              <motion.span
-                className="my-6 animate-text"
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: false, amount: 0.3 }}
-                transition={{ duration: 0.2, ease: "easeOut" }}
-              >
-                Reinvent your business
-              </motion.span>
-              <motion.p
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: false, amount: 0.3 }}
-                transition={{ duration: 0.2, ease: "easeOut" }}
-              >
-                support@example.com
-              </motion.p>
+              <motion.span className="mt-5">Reinvent your business</motion.span>
+              <motion.p>reinvent@altus-intel.com</motion.p>
             </motion.div>
-
-            <motion.div
-              className="flex flex-col max-h-max footersection2"
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: false, amount: 0.3 }}
-              transition={{ duration: 0.2, ease: "easeOut" }}
-            >
-              <motion.h3
-                className="my-4 animate-text"
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: false, amount: 0.3 }}
-                transition={{ duration: 0.2, ease: "easeOut" }}
-              >
-                Get in Touch with us
-              </motion.h3>
-              <div className="px-5 w-full">
-                <div className="footer_input_container">
-                  <motion.input
-                    className="footer_input"
-                    placeholder="Your Email"
-                    initial={{ opacity: 0, y: 30 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: false, amount: 0.3 }}
-                    transition={{ duration: 0.2, ease: "easeOut" }}
-                  />
-                  <motion.span
-                    initial={{ opacity: 0, y: 30 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: false, amount: 0.3 }}
-                    transition={{ duration: 0.2, ease: "easeOut" }}
-                  >
-                    <i className="bi bi-arrow-right"></i>
-                  </motion.span>
-                </div>
-              </div>
-            </motion.div>
+            {/* 
+                   <motion.div className="flex flex-col max-h-max footersection2">
+                     <motion.h3>Get in Touch with Us</motion.h3>
+                     <div className="px-5 w-full">
+                       <div className="footer_input_container">
+                         <motion.input
+                           className="footer_input"
+                           placeholder="Your Email"
+                         />
+                         <motion.span>
+                           <i className="bi bi-arrow-right"></i>
+                         </motion.span>
+                       </div>
+                     </div>
+                   </motion.div> */}
           </div>
         </Section>
       </div>

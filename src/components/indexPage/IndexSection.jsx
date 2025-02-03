@@ -1,13 +1,9 @@
 import { Scroll } from "@react-three/drei";
 import React, {
   forwardRef,
-  useEffect,
-  useImperativeHandle,
   useLayoutEffect,
   useRef,
-  useState,
 } from "react";
-import logoimage from "../../assets/Logo_image.png";
 import secondsectionimage1 from "../../assets/secondsectionimage1.png";
 import secondsectionimage2 from "../../assets/secondsectionimage2.png";
 import fourthIcon1 from "../../assets/fourthIcon1.png";
@@ -32,7 +28,7 @@ const Section = (props) => {
 
 const BlackSection = (props) => {
   return (
-    <section className="w-full BLACKpaddinghori16 flex flex-col justify-start items-center">
+    <section className="w-full BLACKpaddinghori16 bg-black flex flex-col justify-start items-center">
       <div className="w-full h-full flex justify-end items-center    max-w-[1300px]">
         {props.children}
       </div>
@@ -62,7 +58,9 @@ const PartnerSection = ({ number, heading, content, subheading }) => {
 };
 
 const IndexSection = forwardRef(({ onScrollPagesChange }, ref) => {
+  
   const localRef = useRef(null);
+
   useLayoutEffect(() => {
     let debounceTimeout;
 
@@ -89,6 +87,10 @@ const IndexSection = forwardRef(({ onScrollPagesChange }, ref) => {
       window.removeEventListener("resize", handleResize);
     };
   }, [onScrollPagesChange, localRef]);
+
+  const handlelinkedinginclick = () => {
+    window.open("https://www.linkedin.com/company/altusreinvents/", "_blank");
+  };
 
   return (
     <Scroll html className="w-full">
@@ -127,38 +129,24 @@ const IndexSection = forwardRef(({ onScrollPagesChange }, ref) => {
         </Section>
         <Section>
           <div className="flex flex-col mt-10 items-center">
-            <div className="w-full secondboxbg rounded-md flex flex-col justify-center items-center p-4">
-              <motion.h3
-                className="secondsectionheading animate-text"
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: false, amount: 0.3 }}
-                transition={{ duration: 0.2, ease: "easeOut" }}
-              >
-                REINVENTION
-              </motion.h3>
+            <motion.div
+              className="w-full secondboxbg rounded-md flex flex-col justify-center items-center p-4"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: false, amount: 0.3 }}
+              transition={{ duration: 0.2, ease: "easeOut" }}
+            >
+              <h3 className="secondsectionheading animate-text">REINVENTION</h3>
 
-              <motion.h4
-                className="secondsectionsubheading animate-text"
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: false, amount: 0.3 }}
-                transition={{ duration: 0.2, ease: "easeOut" }}
-              >
+              <h4 className="secondsectionsubheading animate-text">
                 STRATEGY FOR SUCCESS
-              </motion.h4>
-              <motion.p
-                className="secondsectionsubpara animate-text"
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: false, amount: 0.3 }}
-                transition={{ duration: 0.2, ease: "easeOut" }}
-              >
+              </h4>
+              <p className="secondsectionsubpara animate-text">
                 The rate of change affecting businesses has risen over 183% in
                 the last 4 years. To counter this, 83% of organisations have
                 accelerated the execution of reinvention with GenAI.
-              </motion.p>
-            </div>
+              </p>
+            </motion.div>
             <motion.p
               className="secondsectionpara animate-text"
               initial={{ opacity: 0, y: 30 }}
@@ -325,7 +313,7 @@ const IndexSection = forwardRef(({ onScrollPagesChange }, ref) => {
                   productivity with the bespoke Agentic AI assistant for
                   customer service.
                 </p>
-                <motion.button
+                {/* <motion.button
                   className="oursite_box_link"
                   initial={{ opacity: 0, y: 30 }}
                   whileInView={{ opacity: 1, y: 0 }}
@@ -333,7 +321,7 @@ const IndexSection = forwardRef(({ onScrollPagesChange }, ref) => {
                   transition={{ duration: 0.2, ease: "easeOut" }}
                 >
                   Learn More
-                </motion.button>
+                </motion.button> */}
               </motion.div>
               <motion.div
                 className="oursite_box"
@@ -350,7 +338,7 @@ const IndexSection = forwardRef(({ onScrollPagesChange }, ref) => {
                   applicable throughout the value chain, designed to solve your
                   unique business problems and inefficiencies.
                 </p>
-                <motion.button
+                {/* <motion.button
                   className="oursite_box_link"
                   initial={{ opacity: 0, y: 30 }}
                   whileInView={{ opacity: 1, y: 0 }}
@@ -358,7 +346,7 @@ const IndexSection = forwardRef(({ onScrollPagesChange }, ref) => {
                   transition={{ duration: 0.2, ease: "easeOut" }}
                 >
                   Learn More
-                </motion.button>
+                </motion.button> */}
               </motion.div>
             </div>
           </div>
@@ -410,7 +398,7 @@ const IndexSection = forwardRef(({ onScrollPagesChange }, ref) => {
             </div>
             <div className="fouthsubflexdiv">
               <div class="goalwrapper goalwrapper_padding">
-                <h3>MAX RESULTS, LOW OVERHEAD </h3>
+                <h3>MAX RESULTS, <br /> LOW OVERHEAD </h3>
                 <p>Achieve more without heavy costs! </p>
                 <span>
                   By optimising processes, we help you achieve peak performance
@@ -474,7 +462,7 @@ const IndexSection = forwardRef(({ onScrollPagesChange }, ref) => {
               />
               <PartnerSection
                 number={2}
-                subheading="PARTNERSHIP FOR LASTING IMPACT "
+                subheading="Partnership for lasting impact"
                 heading="PARTNERSHIP FOR LASTING IMPACT "
                 content="We work closely with you to design and deliver bespoke solutions, ensuring that our AI tools are fine-tuned to address your unique business challenges and requirements."
               />
@@ -486,9 +474,9 @@ const IndexSection = forwardRef(({ onScrollPagesChange }, ref) => {
               />
               <PartnerSection
                 number={4}
-                subheading="Years of experience, young creative minds, and a passion for problem-solving and innovation."
+                subheading="Years of experience, fresh creative minds, and a passion for problem-solving and innovation."
                 heading="EXPERTISE"
-                content="With deep industry knowledge, a flair for creativity, experience, and a commitment to innovation, we don’t just offer technology—we partner with you and provide consultancy to unlock your business’s full potential by clearly identifying challenges, discerning opportunities for improvement, and understanding your unique requirements to develop superior solutions."
+                content="With deep industry knowledge, creativity, and innovation, we go beyond technology by partnering with you to unlock your business's potential."
               />
             </div>
           </div>
@@ -606,7 +594,7 @@ const IndexSection = forwardRef(({ onScrollPagesChange }, ref) => {
           </div>
         </BlackSection>
         <Section>
-          <div className="footer_maindiv">
+          <div className="footer_maindiv h-[63vh]">
             <motion.div
               className="flex flex-col justify-start max-h-max footersection"
               initial={{ opacity: 0, y: 30 }}
@@ -614,126 +602,53 @@ const IndexSection = forwardRef(({ onScrollPagesChange }, ref) => {
               viewport={{ once: false, amount: 0.3 }}
               transition={{ duration: 0.2, ease: "easeOut" }}
             >
-              <motion.img
-                src={logoimage}
-                alt="logo_image"
-                className="footer_logo_image"
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: false, amount: 0.3 }}
-                transition={{ duration: 0.2, ease: "easeOut" }}
-              />
-              <motion.p
-                className="my-16 animate-text"
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: false, amount: 0.3 }}
-                transition={{ duration: 0.2, ease: "easeOut" }}
-              >
+              <motion.p className="uppercase">
+                <span style={{ color: "rgba(219, 139, 54, 1)" }}>
+                  United Kingdom
+                </span>{" "}
+                <br />
                 Newcastle Upon Tyne
+                <br />
+                <span style={{ color: "rgba(219, 139, 54, 1)" }}>
+                  INDIA
+                </span>{" "}
                 <br />
                 Indore
                 <br />
-                Surat (Coming Soon !)
+                Surat (Coming Soon!)
               </motion.p>
-              <motion.span
-                className="text-2xl font-poppins font-bold firstfooterspan"
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: false, amount: 0.3 }}
-                transition={{ duration: 0.2, ease: "easeOut" }}
-              >
+              <motion.span className="text-2xl font-poppins font-bold">
                 <i className="bi bi-c-circle"></i> 2025 Altus
               </motion.span>
             </motion.div>
 
-            <motion.div
-              className="flex flex-col max-h-max footersection"
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: false, amount: 0.3 }}
-              transition={{ duration: 0.2, ease: "easeOut" }}
-            >
+            <motion.div className="flex flex-col max-h-max footersection">
+              {/* <motion.p>Twitter/X</motion.p> */}
+              {/* <motion.p>Instagram</motion.p> */}
               <motion.p
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: false, amount: 0.3 }}
-                transition={{ duration: 0.2, ease: "easeOut" }}
+                className="cursor-pointer underline underline-offset-4"
+                onClick={handlelinkedinginclick}
               >
-                Twitter/X
+                LinkedIn
               </motion.p>
-              <motion.p
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: false, amount: 0.3 }}
-                transition={{ duration: 0.2, ease: "easeOut" }}
-              >
-                Instagram
-              </motion.p>
-              <motion.p
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: false, amount: 0.3 }}
-                transition={{ duration: 0.2, ease: "easeOut" }}
-              >
-                Linkedin
-              </motion.p>
-              <motion.span
-                className="my-6 animate-text"
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: false, amount: 0.3 }}
-                transition={{ duration: 0.2, ease: "easeOut" }}
-              >
-                Reinvent your business
-              </motion.span>
-              <motion.p
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: false, amount: 0.3 }}
-                transition={{ duration: 0.2, ease: "easeOut" }}
-              >
-                support@example.com
-              </motion.p>
+              <motion.span className="mt-5">Reinvent your business</motion.span>
+              <motion.p>reinvent@altus-intel.com</motion.p>
             </motion.div>
-
-            <motion.div
-              className="flex flex-col max-h-max footersection2"
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: false, amount: 0.3 }}
-              transition={{ duration: 0.2, ease: "easeOut" }}
-            >
-              <motion.h3
-                className="my-4 animate-text"
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: false, amount: 0.3 }}
-                transition={{ duration: 0.2, ease: "easeOut" }}
-              >
-                Get in Touch with us
-              </motion.h3>
-              <div className="px-5 w-full">
-                <div className="footer_input_container">
-                  <motion.input
-                    className="footer_input"
-                    placeholder="Your Email"
-                    initial={{ opacity: 0, y: 30 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: false, amount: 0.3 }}
-                    transition={{ duration: 0.2, ease: "easeOut" }}
-                  />
-                  <motion.span
-                    initial={{ opacity: 0, y: 30 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: false, amount: 0.3 }}
-                    transition={{ duration: 0.2, ease: "easeOut" }}
-                  >
-                    <i className="bi bi-arrow-right"></i>
-                  </motion.span>
-                </div>
-              </div>
-            </motion.div>
+            {/* 
+                     <motion.div className="flex flex-col max-h-max footersection2">
+                       <motion.h3>Get in Touch with Us</motion.h3>
+                       <div className="px-5 w-full">
+                         <div className="footer_input_container">
+                           <motion.input
+                             className="footer_input"
+                             placeholder="Your Email"
+                           />
+                           <motion.span>
+                             <i className="bi bi-arrow-right"></i>
+                           </motion.span>
+                         </div>
+                       </div>
+                     </motion.div> */}
           </div>
         </Section>
       </div>

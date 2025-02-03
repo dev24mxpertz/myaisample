@@ -152,7 +152,6 @@ import { Mountd } from "./Mountd";
 import firsttexture from "../assets/blacktexture.jpg";
 import orangestriplinetexture from "../assets/orangestriplinetexture.jpg";
 
-// Constants for scroll progress markers
 const Floor_Height = 10;
 const radius = 3;
 
@@ -179,18 +178,18 @@ export const CombinedMeshes = ({ position, ...props }) => {
     const localProgress = progress / fullProgress;
 
     if (ref.current) {
-      // Smooth clockwise rotation
-      rotationAxis.current = localProgress * Math.PI * 4; // Rotate up to 720 degrees (2 full turns)
+      
+      rotationAxis.current = localProgress * Math.PI * 4; 
       ref.current.rotation.y = rotationAxis.current;
 
-      // Keep the model in the center of the screen by adjusting the camera's Y position
+     
       cameraPosition.current.y = 6.98 + Math.sin(localProgress * Math.PI) * 2;
 
-      ref.current.position.x = 0; // Lock the position along X-axis
-      ref.current.position.z = 0; // Lock the position along Z-axis
+      ref.current.position.x = 0; 
+      ref.current.position.z = 0; 
     }
 
-    // Update camera position smoothly to maintain center focus
+
     camera.position.set(
       cameraPosition.current.x,
       cameraPosition.current.y,
@@ -253,6 +252,7 @@ export const CombinedMeshes = ({ position, ...props }) => {
   );
 };
 
+
 ///----getting infinity sign at the last
 
 // import React, { useRef } from "react";
@@ -269,7 +269,6 @@ export const CombinedMeshes = ({ position, ...props }) => {
 // import firsttexture from "../assets/blacktexture.jpg";
 // import orangestriplinetexture from "../assets/orangestriplinetexture.jpg";
 
-// // Constants for scroll progress markers
 // const Floor_Height = 10;
 // const radius = 3;
 

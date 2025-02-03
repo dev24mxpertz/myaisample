@@ -360,9 +360,9 @@
 
 .oursite_box > h3 {
   font-family: Open Sans;
-  font-size: 48px;
+  font-size: 36px;
   font-weight: 700;
-  line-height: 65.37px;
+  line-height: 60.37px;
   text-align: left;
   text-underline-position: from-font;
   text-decoration-skip-ink: none;
@@ -385,7 +385,7 @@
 
 .oursite_box > p {
   font-family: Open Sans;
-  font-size: 24px;
+  font-size: 21px;
   font-weight: 600;
   line-height: 32.68px;
   text-align: left;
@@ -398,9 +398,9 @@
 
 .oursite_box:hover p {
   font-family: Open Sans;
-  font-size: 24px;
+  font-size: 18px;
   font-weight: 600;
-  line-height: 32.68px;
+  line-height: 24.68px;
   text-align: left;
   text-underline-position: from-font;
   text-decoration-skip-ink: none;
@@ -801,9 +801,9 @@ height: 100%;
 
 .headingtext {
   font-family: "Lexend Deca", sans-serif;
-  font-size: 32px;
+  font-size: 29px;
   font-weight: 700;
-  line-height: 40px;
+  line-height: 35px;
   text-align: left;
   text-transform: uppercase;
   color: rgba(219, 139, 54, 1);
@@ -968,7 +968,7 @@ height: 100%;
   width: 25%;
   display: flex;
   flex-direction: column;
-  justify-content: space-evenly;
+  justify-content: space-between;
   align-items: flex-start;
 }
 
@@ -986,7 +986,7 @@ height: 100%;
 
 .footersection > p {
   font-family: Open Sans;
-  font-size: 24px;
+  font-size: 21px;
   font-weight: 600;
   line-height: 32.68px;
   text-align: left;
@@ -1207,7 +1207,6 @@ height: 100%;
 .footer_maindiv {
   width: 100%;
   display: flex;
-  padding: 0px 20px;
   justify-content: space-between;
   align-items: center;
 }

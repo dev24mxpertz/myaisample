@@ -27,7 +27,7 @@ const FrontendPage = () => {
             FrontendPageSectionRef.current?.clientHeight;
           const windowHeight = window.innerHeight;
           const pages = indexSectionHeight / windowHeight;
-          setScrollPages(Math.max(pages, 2));
+          setScrollPages(Math.max(pages, 3));
         }
       };
       const handleResizeEvent = () => {

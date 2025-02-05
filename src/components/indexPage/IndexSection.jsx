@@ -1,9 +1,5 @@
 import { Scroll } from "@react-three/drei";
-import React, {
-  forwardRef,
-  useLayoutEffect,
-  useRef,
-} from "react";
+import React, { forwardRef, useLayoutEffect, useRef } from "react";
 import secondsectionimage1 from "../../assets/secondsectionimage1.png";
 import secondsectionimage2 from "../../assets/secondsectionimage2.png";
 import fourthIcon1 from "../../assets/fourthIcon1.png";
@@ -58,7 +54,6 @@ const PartnerSection = ({ number, heading, content, subheading }) => {
 };
 
 const IndexSection = forwardRef(({ onScrollPagesChange }, ref) => {
-  
   const localRef = useRef(null);
 
   useLayoutEffect(() => {
@@ -398,7 +393,9 @@ const IndexSection = forwardRef(({ onScrollPagesChange }, ref) => {
             </div>
             <div className="fouthsubflexdiv">
               <div class="goalwrapper goalwrapper_padding">
-                <h3>MAX RESULTS, <br /> LOW OVERHEAD </h3>
+                <h3>
+                  MAX RESULTS, <br /> LOW OVERHEAD{" "}
+                </h3>
                 <p>Achieve more without heavy costs! </p>
                 <span>
                   By optimising processes, we help you achieve peak performance
@@ -621,10 +618,7 @@ const IndexSection = forwardRef(({ onScrollPagesChange }, ref) => {
                 <i className="bi bi-c-circle"></i> 2025 Altus
               </motion.span>
             </motion.div>
-
             <motion.div className="flex flex-col max-h-max footersection">
-              {/* <motion.p>Twitter/X</motion.p> */}
-              {/* <motion.p>Instagram</motion.p> */}
               <motion.p
                 className="cursor-pointer underline underline-offset-4"
                 onClick={handlelinkedinginclick}
@@ -634,21 +628,6 @@ const IndexSection = forwardRef(({ onScrollPagesChange }, ref) => {
               <motion.span className="mt-5">Reinvent your business</motion.span>
               <motion.p>reinvent@altus-intel.com</motion.p>
             </motion.div>
-            {/* 
-                     <motion.div className="flex flex-col max-h-max footersection2">
-                       <motion.h3>Get in Touch with Us</motion.h3>
-                       <div className="px-5 w-full">
-                         <div className="footer_input_container">
-                           <motion.input
-                             className="footer_input"
-                             placeholder="Your Email"
-                           />
-                           <motion.span>
-                             <i className="bi bi-arrow-right"></i>
-                           </motion.span>
-                         </div>
-                       </div>
-                     </motion.div> */}
           </div>
         </Section>
       </div>
